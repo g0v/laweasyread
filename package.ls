@@ -16,3 +16,4 @@ engines:
 devDependencies:
   LiveScript: \1.1.x
   should: \1.2.x
+license: \MIT
