@@ -4,6 +4,8 @@ descritpion: 'API for Taiwan law'
 scripts:
   prepublish: """
     ./node_modules/.bin/lsc -cj package.ls
+    ./node_modules/.bin/lsc -co lib lib/*.ls
+    ./node_modules/.bin/lsc -c app.ls
   """
   test: """
     ./node_modules/.bin/lsc test/*.ls

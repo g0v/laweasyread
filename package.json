@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "descritpion": "API for Taiwan law",
   "scripts": {
-    "prepublish": "./node_modules/.bin/lsc -cj package.ls",
+    "prepublish": "./node_modules/.bin/lsc -cj package.ls\n./node_modules/.bin/lsc -co lib lib/*.ls\n./node_modules/.bin/lsc -c app.ls",
     "test": "./node_modules/.bin/lsc test/*.ls"
   },
   "dependencies": {
