@@ -1,0 +1,11 @@
+#!/bin/sh
+
+lsc=./node_modules/.bin/lsc
+
+if [ ! -e $lsc ]; then
+        npm install LiveScript@1.1.x
+fi
+
+$lsc -cj package.ls
+$lsc -co lib lib/*.ls
+$lsc -c app.ls
