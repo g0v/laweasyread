@@ -1,4 +1,4 @@
-require!{\romanize-component, should}
+require!{\../lib/parse, should}
 
 const DATA =
   * decimal: 1
@@ -29,4 +29,6 @@ const DATA =
     roman: \M
 
 for data in DATA
-  romanizeComponent data.decimal .should.equal data.roman
+  parse.roman_to_integer data.roman.toUpperCase! .should.equal data.decimal
+  parse.roman_to_integer data.roman.toLowerCase! .should.equal data.decimal
+  parse.integer_to_roman data.decimal .should.equal data.roman
