@@ -2,7 +2,7 @@ name: \laweasyread
 version: \0.0.1
 contributors:
   * 'ChangZhuo Chen <czchen@gmail.com>'
-  * 'kcliu <kcliu@aol.tw>'
+  * 'kcliu <gjliou@cs.nctu.edu.tw>'
 descritpion: 'API for Taiwan law'
 scripts:
   prepublish: \scripts/prepublish
