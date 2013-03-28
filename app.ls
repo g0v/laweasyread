@@ -7,6 +7,8 @@ app.get '/' (req, res) ->
     res.send msg
 
 app.get '/laws/:query' (req, res) ->
-    res.jsonp twlaw.get_law req.params
+    twlaw.get_law req.params, (strJson) ->
+        res.jsonp strJson 
 
-app.listen process.env.PORT || 3000
+(process.env.PORT or 3000) |> app.listen
+"application starts" |> console.log
