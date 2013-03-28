@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "contributors": [
     "ChangZhuo Chen <czchen@gmail.com>",
-    "kcliu <kcliu@aol.tw>"
+    "kcliu <gjliou@cs.nctu.edu.tw>"
   ],
   "descritpion": "API for Taiwan law",
   "scripts": {
-    "prepublish": "scripts/prepublish",
+    "prepublish": "./node_modules/.bin/lsc -cj package.ls\n./node_modules/.bin/lsc -co lib lib/*.ls\n./node_modules/.bin/lsc -c app.ls",
     "test": "./node_modules/.bin/lsc test/*.ls"
   },
   "dependencies": {
