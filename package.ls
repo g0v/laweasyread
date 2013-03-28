@@ -7,11 +7,12 @@ descritpion: 'API for Taiwan law'
 scripts:
     prepublish: """
         ./node_modules/.bin/lsc -cj package.ls
-        ./node_modules/.bin/lsc -co lib lib/*.ls
-        ./node_modules/.bin/lsc -c app.ls
-     """
+        ./node_modules/.bin/continuation -p lib/parse.ls > lib/parse.js
+        ./node_modules/.bin/continuation -p lib/twlaw.ls > lib/twlaw.js
+        ./node_modules/.bin/continuation -p app.ls > app.js
+    """
     test: """
-        ./node_modules/.bin/lsc test/*.ls
+        ./node_modules/.bin/continuation test/roman.ls
     """
 dependencies:
     express: \3.x
@@ -21,6 +22,7 @@ engines:
     node: \0.10.x
 devDependencies:
     LiveScript: \1.1.x
+    continuation: \~0.1.2
     should: \1.2.x
 licenses:
     * type: \MIT
