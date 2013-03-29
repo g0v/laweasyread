@@ -1,20 +1,56 @@
-require! mongodb
+require!{mongodb}
 
-exports.get_law_fake = (params) ->
-    law: params.query
-    content: "行為之處罰，以行為時之法律有明文規定者為限。拘束人身自由之保安處分，亦同。"
-    link: "http://law.moj.gov.tw/LawClass/LawSingle.aspx?Pcode=C0000001&FLNO=1"
+# mongodb collection name
+const ARTICLE = \article
+const STATUTE = \statute
 
 mongoUri = \mongodb://localhost:27017/laweasyread
+
 exports.setMongoUri = ->
+    console.log "Set mongoUri to #it"
     mongoUri := it
 
-exports.get_law = (params, cb) ->
-    law = params.query
+exports.getStatute = (params, cb) ->
+    m = /^([^_]+)_(\d+)$/ ==  params.query
+    if not m
+        cb new Error "query string error", null
+        return
+
+    name = m.1
+    article = m.2
+
     err, db <- mongodb.Db.connect mongoUri
-    err, collection <- db.collection 'laweasyread_fake' 
-    err, data <- collection.find({"law":law}).toArray
-    strJson:""
-    strJson = '{"law":"'+law+'","content":"'+data[0].content+'","link":"'+data[0].link+'"}'
-    strJson |> console.log 
-    cb strJson
+    if err
+        cb err, null
+        return
+
+    err, collection <- db.collection STATUTE
+    if err
+        cb err, null
+        return
+
+    err, data <- collection.find({name: $elemMatch:{name: name}}).toArray
+    if err
+        cb err, null
+        return
+
+    if data.length == 0
+        cb null, {}
+        return
+
+    lyID = data[0].lyID
+
+    err, collection <- db.collection ARTICLE
+    if err
+        cb err, null
+        return
+
+    err, data <- collection.find({lyID: lyID, article: article}).toArray
+    if data.length == 0
+        cb null, {}
+        return
+
+    res =
+        content: data[0].content
+
+    cb null, res

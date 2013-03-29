@@ -15,6 +15,7 @@ scripts:
     """
 dependencies:
     express: \3.x
+    mongodb: \~1.2.14
     \romanize-component : \0.1.x
     \deromanize-component : \0.1.x
 engines:
