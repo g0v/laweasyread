@@ -17,7 +17,7 @@ chainCloseDB = (db, cb) ->
 exports.getStatute = (params, cb) ->
     m = /^([^_]+)_(\d+)$/ ==  params.query
     if not m
-        cb new Error "query string error", null
+        cb new Error "query string format error", null
         return
 
     name = m.1
