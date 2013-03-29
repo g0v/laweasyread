@@ -1,5 +1,4 @@
 require!{\../lib/parse, should}
-console.log "Run #__filename"
 
 const DATA =
     * decimal: 1

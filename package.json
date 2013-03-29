@@ -7,8 +7,8 @@
   ],
   "descritpion": "API for Taiwan law",
   "scripts": {
-    "prepublish": "./node_modules/.bin/lsc -cj package.ls\n./node_modules/.bin/continuation -p lib/parse.ls > lib/parse.js\n./node_modules/.bin/continuation -p lib/twlaw.ls > lib/twlaw.js\n./node_modules/.bin/continuation -p app.ls > app.js",
-    "test": "./node_modules/.bin/continuation test/roman.ls"
+    "prepublish": "./node_modules/.bin/lsc -cj package.ls\n./node_modules/.bin/lsc -co lib lib/*.ls\n./node_modules/.bin/lsc -c app.ls",
+    "test": "./node_modules/.bin/lsc test/*.ls"
   },
   "dependencies": {
     "express": "3.x",
@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "LiveScript": "1.1.x",
-    "continuation": "~0.1.2",
     "should": "1.2.x"
   },
   "licenses": {
