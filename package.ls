@@ -11,7 +11,7 @@ scripts:
         ./node_modules/.bin/lsc -c app.ls
      """
     test: """
-        ./node_modules/.bin/lsc test/*.ls
+        ./node_modules/.bin/lsc test.ls
     """
 dependencies:
     express: \3.x
@@ -20,6 +20,7 @@ dependencies:
 engines:
     node: \0.10.x
 devDependencies:
+    \exec-sync : \~0.1.5
     LiveScript: \1.1.x
     should: \1.2.x
 licenses:
