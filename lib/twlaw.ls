@@ -10,6 +10,10 @@ exports.setMongoUri = ->
     console.log "Set mongoUri to #it"
     mongoUri := it
 
+chainCloseDB = (db, cb) ->
+    db.close!
+    (err, res) -> cb err, res
+
 exports.getStatute = (params, cb) ->
     m = /^([^_]+)_(\d+)$/ ==  params.query
     if not m
@@ -23,6 +27,7 @@ exports.getStatute = (params, cb) ->
     if err
         cb err, null
         return
+    cb := chainCloseDB db, cb
 
     err, collection <- db.collection STATUTE
     if err
