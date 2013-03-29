@@ -1,6 +1,8 @@
 require!{express, './lib/twlaw'}
 app = express!
 
+twlaw.setMongoUri process.env.MONGOLAB_URI or \mongodb://localhost:27017/laweasyread
+
 msg = "API endpoint at <p>/laws/(law_abbr_name)</p>"
 
 app.get '/' (req, res) ->
