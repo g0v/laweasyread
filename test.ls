@@ -1,8 +1,11 @@
-require!{\exec-sync, fs}
+require!{fs}
 
 files = fs.readdirSync "#__dirname/test"
 
 for file in files
+    if file != /\.ls/ => continue
+
     path = "#__dirname/test/#file"
+
     console.log "Run #path"
-    execSync "./node_modules/.bin/lsc #path"
+    require path

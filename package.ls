@@ -20,7 +20,6 @@ dependencies:
 engines:
     node: \0.10.x
 devDependencies:
-    \exec-sync : \~0.1.5
     LiveScript: \1.1.x
     should: \1.2.x
 licenses:
