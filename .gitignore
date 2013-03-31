@@ -1,3 +1,6 @@
 *.js
 *.swp
 /node_modules
+
+!/prepublish.js
+!/test.js

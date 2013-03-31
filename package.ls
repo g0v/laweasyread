@@ -5,19 +5,14 @@ contributors:
     * 'kcliu <gjliou@cs.nctu.edu.tw>'
 descritpion: 'API for Taiwan law'
 scripts:
-    prepublish: """
-        ./node_modules/.bin/lsc -cj package.ls
-        ./node_modules/.bin/lsc -co lib lib/*.ls
-        ./node_modules/.bin/lsc -c app.ls
-     """
-    test: """
-        ./node_modules/.bin/lsc test.ls
-    """
+    prepublish: "node prepublish.js"
+    test: "node test.js"
 dependencies:
     express: \3.x
     mongodb: \~1.2.14
     \romanize-component : \0.1.x
     \deromanize-component : \0.1.x
+    shelljs: \~0.1.2
 engines:
     node: \0.10.x
 devDependencies:
