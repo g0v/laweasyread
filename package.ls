@@ -6,6 +6,7 @@ contributors:
 descritpion: 'API for Taiwan law'
 scripts:
     prepublish: "node prepublish.js"
+    start: "node server/start.js"
     test: "node test.js"
 dependencies:
     \deromanize-component : \0.1.x
