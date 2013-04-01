@@ -93,7 +93,6 @@ exports.getSuggestion = (params, cb) ->
     for statute in data
         if statute.name != void
             for name in statute.name
-                console.log typeof name.name
                 if typeof name.name == \string and name.name != ""
                     suggestion.push name.name
 
