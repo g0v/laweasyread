@@ -8,10 +8,11 @@ scripts:
     prepublish: "node prepublish.js"
     test: "node test.js"
 dependencies:
+    \deromanize-component : \0.1.x
     express: \3.x
     mongodb: \~1.2.14
+    optimist: \~0.3.5
     \romanize-component : \0.1.x
-    \deromanize-component : \0.1.x
     shelljs: \~0.1.2
 engines:
     node: \0.10.x
