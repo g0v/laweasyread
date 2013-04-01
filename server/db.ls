@@ -4,7 +4,7 @@ require!{mongodb}
 const ARTICLE = \article
 const STATUTE = \statute
 
-mongoUri = \mongodb://localhost:27017/laweasyread
+mongoUri = void
 
 exports.setMongoUri = ->
     console.log "Set mongoUri to #it"
