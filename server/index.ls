@@ -10,6 +10,14 @@ const API_TABLE =
         func: db.getSuggestion
         default: []
 
+get_api_callback = (info) ->
+    (req, res) ->
+        (err, ret) <- info.func req.params
+        if err
+            console.error err
+            ret = info.default
+        res.jsonp ret
+
 exports.start = (config) ->
     app = express!
     app.use express.compress!
@@ -23,14 +31,8 @@ exports.start = (config) ->
     app.get STATIC_URI, (req, res) ->
         res.redirect \/index.html
 
-    for api, data of API_TABLE
-        app.get "#API_URI/#api", (req, res) ->
-            console.log "call #API_URI/#api"
-            (err, ret) <- data.func req.params
-            if err
-                console.error err
-                ret = data.default
-            res.jsonp ret
+    for api, info of API_TABLE
+        app.get "#API_URI/#api", get_api_callback info
 
     console.log "start application"
     console.log "port: #{config.port}"
