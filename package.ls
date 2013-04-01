@@ -9,6 +9,7 @@ scripts:
     start: "node server/start.js"
     test: "node test.js"
 dependencies:
+    async: \~0.2.6
     \deromanize-component : \0.1.x
     express: \3.x
     mongodb: \~1.2.14
