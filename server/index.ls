@@ -1,8 +1,9 @@
 require!{express, \./db}
 STATIC_URI = \/
 
-API_URI = \/api
-API_URI_STATUTE = API_URI + \/statute/:query
+const API_URI = \/api
+const API_TABLE =
+    \statute/:query : db.getStatute
 
 exports.start = (config) ->
     app = express!
@@ -17,12 +18,14 @@ exports.start = (config) ->
     app.get STATIC_URI, (req, res) ->
         res.redirect \/index.html
 
-    app.get API_URI_STATUTE, (req, res) ->
-        (err, ret) <- db.getStatute req.params
-        if err
-            console.error err
-            ret = {}
-        res.jsonp ret
+    for api, func of API_TABLE
+        app.get "#API_URI/#api", (req, res) ->
+            console.log "call #API_URI/#api"
+            (err, ret) <- func req.params
+            if err
+                console.error err
+                ret = {}
+            res.jsonp ret
 
     console.log "start application"
     console.log "port: #{config.port}"
