@@ -6,7 +6,7 @@ API_URI_STATUTE = API_URI + \/statute/:query
 
 exports.start = (config) ->
     app = express!
-
+    app.use express.compress!
     app.use express.logger \dev
 
     console.log "static dir is #{config.static_dir}"
