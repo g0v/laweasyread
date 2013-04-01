@@ -22,6 +22,7 @@ exports.getStatute = (params, cb) ->
 
     name = m.1
     article = m.2
+    console.log "query statue `#name' article `#article'"
 
     err, db <- mongodb.Db.connect mongoUri
     if err
@@ -51,6 +52,10 @@ exports.getStatute = (params, cb) ->
         return
 
     err, data <- collection.find({lyID: lyID, article: article}).toArray
+    if err
+        cb err, null
+        return
+
     if data.length == 0
         cb null, {}
         return
