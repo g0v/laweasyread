@@ -15,7 +15,7 @@ chainCloseDB = (db, cb) ->
     (err, res) -> cb err, res
 
 exports.getStatute = (params, cb) ->
-    m = /^([^_]+)_(\d+)$/ ==  params.query
+    m = /^([^_]+)_(\d+)$/ .exec params.query
     if not m
         cb new Error "query string format error", null
         return
@@ -35,7 +35,7 @@ exports.getStatute = (params, cb) ->
         cb err, null
         return
 
-    err, data <- collection.find({name: $elemMatch:{name: name}}).toArray
+    err, data <- collection.find { name: $elemMatch: { name: name } } .toArray
     if err
         cb err, null
         return
@@ -51,7 +51,7 @@ exports.getStatute = (params, cb) ->
         cb err, null
         return
 
-    err, data <- collection.find({lyID: lyID, article: article}).toArray
+    err, data <- collection.find { lyID: lyID, article: article } .toArray
     if err
         cb err, null
         return
