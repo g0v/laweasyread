@@ -3,7 +3,12 @@ STATIC_URI = \/
 
 const API_URI = \/api
 const API_TABLE =
-    \statute/:query : db.getStatute
+    \statute/:query :
+        func: db.getStatute
+        default: {}
+    \suggestion/:query :
+        func: db.getSuggestion
+        default: []
 
 exports.start = (config) ->
     app = express!
@@ -18,13 +23,13 @@ exports.start = (config) ->
     app.get STATIC_URI, (req, res) ->
         res.redirect \/index.html
 
-    for api, func of API_TABLE
+    for api, data of API_TABLE
         app.get "#API_URI/#api", (req, res) ->
             console.log "call #API_URI/#api"
-            (err, ret) <- func req.params
+            (err, ret) <- data.func req.params
             if err
                 console.error err
-                ret = {}
+                ret = data.default
             res.jsonp ret
 
     console.log "start application"

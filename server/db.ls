@@ -64,3 +64,37 @@ exports.getStatute = (params, cb) ->
         content: data[0].content
 
     cb null, res
+
+exports.getSuggestion = (params, cb) ->
+    keyword = params.query
+    console.log "suggestion keyword is `#keyword'"
+
+    err, db <- mongodb.Db.connect mongoUri
+    if err
+        cb err, null
+        return
+    cb := chainCloseDB db, cb
+
+    err, collection <- db.collection STATUTE
+    if err
+        cb err, null
+        return
+
+    err, data <- collection.find { name: $elemMatch: { name: { $regex: keyword } } } .toArray!
+    if err
+        cb err, null
+        return
+
+    if data.length == 0
+        cb null, []
+        return
+
+    suggestion = []
+    for statute in data
+        if statute.name != void
+            for name in statute.name
+                console.log typeof name.name
+                if typeof name.name == \string and name.name != ""
+                    suggestion.push name.name
+
+    cb null, suggestion
