@@ -6,3 +6,5 @@
 
 !/prepublish.js
 !/test.js
+!/public/js/bootstrap.min.js
+!/public/js/jquery-1.9.1.min.js

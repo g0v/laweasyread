@@ -1,8 +1,14 @@
-doctype 5
-html(ng-app="laweasyread")
-    head
-        meta(charset="utf-8")
-        title= "laweasyread"
-    body
-    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.3/angular.min.js")
-    script(src="js/app.js")
+extends layout
+
+block navbar
+    .navbar-inner
+        .container
+            .brand laweasyread
+block querybox
+    .search-query
+        input(id="query", autofocus, placeholder="請輸入法律名稱")
+
+block content
+    #lawcontent
+        .well
+            h2 law content
