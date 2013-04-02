@@ -22,14 +22,17 @@ exports.start = (config) ->
     app = express!
     app.use express.compress!
     app.use express.logger \dev
+    app.set \views config.views_dir
+    app.set 'view engine' 'jade'
 
     console.log "static dir is #{config.static_dir}"
-    app.use STATIC_URI, express.static config.static_dir
+    app.use express.static(config.static_dir)
 
     db.setMongoUri config.mongo_uri
 
-    app.get STATIC_URI, (req, res) ->
-        res.redirect \/index.html
+    do
+        (req, res) <- app.get STATIC_URI
+        res.render \index
 
     for api, info of API_TABLE
         app.get "#API_URI/#api", get_api_callback info

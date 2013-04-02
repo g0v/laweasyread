@@ -7,5 +7,4 @@ var jade = ['node_modules', '.bin', 'jade'].join(path.sep);
 shell.exec(lsc + " -cj package.ls");
 shell.exec(lsc + " -c server");
 
-shell.exec(lsc + " -o app -c client");
-shell.exec(jade + " client/ --out app/");
+shell.exec(lsc + " -c public");
