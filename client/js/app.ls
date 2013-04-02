@@ -1,0 +1,1 @@
+laweasyread = angular.module \laweasyread, []
