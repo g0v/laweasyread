@@ -1,5 +1,7 @@
 *.js
 *.swp
+
+/app
 /node_modules
 
 !/prepublish.js
