@@ -11,8 +11,9 @@ exports.setMongoUri = ->
     mongoUri := it
 
 chainCloseDB = (db, cb) ->
-    db.close!
-    (err, res) -> cb err, res
+    (err, res) ->
+        db.close!
+        cb err, res
 
 exports.getStatute = (params, cb) ->
     m = /^([^_]+)_(\d+)$/ .exec params.query
