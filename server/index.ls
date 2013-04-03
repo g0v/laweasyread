@@ -22,6 +22,7 @@ exports.start = (config) ->
     app = express!
     app.use express.compress!
     app.use express.logger \dev
+    app.use(express.favicon());
     app.set \views config.views_dir
     app.set 'view engine' 'jade'
 
