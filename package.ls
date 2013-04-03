@@ -26,6 +26,7 @@ devDependencies:
     LiveScript: \1.1.x
     mocha: \~1.8.2
     \pow-mongodb-fixtures : \~0.8.1
+    request: \~2.16.6
     should: \1.2.x
 licenses:
     * type: \MIT
