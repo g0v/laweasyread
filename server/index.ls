@@ -37,9 +37,15 @@ exports.start = (config) ->
     for api, info of API_TABLE
         app.get "#API_URI/#api", get_api_callback info
 
+# error handling
     do
         (req, res) <- app.use!
         res.render \404.jade
+
+    do
+        (err, req, res, next) <- app.use!
+        console.error(err.stack);
+        res.render \500.jade
 
     console.log "start application"
     console.log "port: #{config.port}"
