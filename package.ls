@@ -7,7 +7,10 @@ descritpion: 'API for Taiwan law'
 scripts:
     prepublish: "node prepublish.js"
     start: "node server/start.js"
-    test: "node test.js"
+    test: """
+        ./node_modules/.bin/lsc -c test
+        ./node_modules/.bin/mocha --reporter spec
+    """
 dependencies:
     async: \~0.2.6
     \deromanize-component : \0.1.x
