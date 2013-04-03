@@ -8,9 +8,8 @@ var all_test = shell.find('test').filter(
 
 for (var i = 0; i < all_test.length; ++i) {
     console.log("Run " + all_test[i]);
-    shell.exec(lsc + " " + all_test[i], function(code){
-        if (code !== 0) {
-            return code;
-        }
-    });
+    var ret = shell.exec(lsc + " " + all_test[i]);
+    if (ret.code !== 0) {
+        shell.exit(ret.code);
+    }
 }
