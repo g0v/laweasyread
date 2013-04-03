@@ -22,7 +22,7 @@ exports.start_server = (data, callback) ->
         \--port, port]
 
     server.stdout.on \data, (data) ->
-        if data.toString! == /start application/
+        if data.toString! == /application started/
             servers[host] =
                 collection: collection
                 process: server

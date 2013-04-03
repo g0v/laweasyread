@@ -1,4 +1,4 @@
-require!{express, \./db}
+require!{express, http, \./db}
 STATIC_URI = \/
 
 const API_URI = \/api
@@ -51,6 +51,5 @@ exports.start = (config) ->
         console.error(err.stack);
         res.render \500.jade
 
-    console.log "start application"
-    console.log "port: #{config.port}"
-    app.listen config.port
+    <- http.createServer app .listen config.port
+    console.log "application started on port #{config.port}"
