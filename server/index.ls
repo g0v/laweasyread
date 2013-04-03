@@ -19,6 +19,9 @@ get_api_callback = (info) ->
         res.jsonp ret
 
 exports.start = (config) ->
+    config.views_dir = config.views_dir or "#__dirname/../views"
+    config.static_dir = config.static_dir or "#__dirname/../public"
+
     app = express!
     app.use express.compress!
     app.use express.logger \dev
@@ -27,7 +30,7 @@ exports.start = (config) ->
     app.set 'view engine' 'jade'
 
     console.log "static dir is #{config.static_dir}"
-    app.use express.static(config.static_dir)
+    app.use express.static config.static_dir
 
     db.setMongoUri config.mongo_uri
 
