@@ -37,6 +37,10 @@ exports.start = (config) ->
     for api, info of API_TABLE
         app.get "#API_URI/#api", get_api_callback info
 
+    do
+        (req, res) <- app.use!
+        res.render \404.jade
+
     console.log "start application"
     console.log "port: #{config.port}"
     app.listen config.port
