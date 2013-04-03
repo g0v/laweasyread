@@ -31,5 +31,5 @@ exports.start_server = (data, callback) ->
 
 exports.stop_server = (host, callback) ->
     servers[host].process.kill!
-    (err) <- servers[host].fixture.clear# servers[host].collection
+    (err) <- servers[host].fixture.clear servers[host].collection
     callback err
