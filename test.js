@@ -1,15 +1,11 @@
 var shell = require('shelljs');
 var path = require('path');
 
-var lsc = ['node_modules', '.bin', 'lsc'].join(path.sep);
+var bin = ['node_modules', '.bin'].join(path.sep);
+var test_path = 'test';
 
-var all_test = shell.find('test').filter(
-    function (file) { return file.match(/\.ls$/); });
+var mocha = [bin, 'mocha'].join(path.sep);
+var lsc = [bin, 'lsc'].join(path.sep);
 
-for (var i = 0; i < all_test.length; ++i) {
-    console.log("Run " + all_test[i]);
-    var ret = shell.exec(lsc + " " + all_test[i]);
-    if (ret.code !== 0) {
-        shell.exit(ret.code);
-    }
-}
+shell.exec(lsc + " -c " + test_path);
+shell.exec(mocha + " " + test_path);

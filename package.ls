@@ -21,6 +21,7 @@ engines:
     node: \0.10.x
 devDependencies:
     LiveScript: \1.1.x
+    mocha: \~1.8.2
     should: \1.2.x
 licenses:
     * type: \MIT
