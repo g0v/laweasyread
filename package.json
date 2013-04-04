@@ -25,6 +25,7 @@
     "node": "0.10.x"
   },
   "devDependencies": {
+    "jscoverage": "~0.3.6",
     "LiveScript": "1.1.x",
     "mocha": "~1.8.2",
     "request": "~2.16.6",

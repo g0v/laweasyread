@@ -1,4 +1,5 @@
-require!{async, child_process, mongodb, \../server/index}
+require!{async, child_process, mongodb}
+
 
 servers = {};
 
@@ -27,7 +28,10 @@ exports.start_server = (data, callback) ->
 
     if err => callback err, null; return
 
-    child = child_process.spawn \node, ["#__dirname/../server/start.js",
+    start = if process.env.LAWEASYREAD_COV => "#__dirname/../server-cov/start.js"
+        else "#__dirname/../server/start.js"
+
+    child = child_process.spawn \node, [start,
         \--mongo_uri, mongo_uri,
         \--port, port]
 
