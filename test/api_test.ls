@@ -60,5 +60,5 @@ describe "Test /api/suggestion/", ->
             done!
 
 after (done) ->
-    helper.stop_server host
+    (err) <- helper.stop_server host
     done!
