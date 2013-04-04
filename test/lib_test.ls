@@ -1,8 +1,7 @@
 require!{should}
 test = it
 
-libpath = if process.env.LAWEASYREAD_COV => \../lib-cov/ else \../lib/
-parse = require libpath + \parse
+parse = require \.. .parse
 
 const DATA =
     * decimal: 1

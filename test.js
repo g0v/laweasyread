@@ -10,8 +10,6 @@ var lsc = [bin, 'lsc'].join(path.sep);
 var mocha = [bin, 'mocha'].join(path.sep);
 var jscoverage = [bin, 'jscoverage'].join(path.sep);
 
-var src = ['lib', 'server'];
-
 var compile = function (src) {
     for (var i = 0; i < src.length; ++i) {
         shell.exec(lsc + " -c " + src[i]);
@@ -41,11 +39,10 @@ var generate_coverage = function (src) {
         })
         .argv;
 
-    compile(src);
-    compile(['test']);
+    compile(['lib', 'test']);
 
     if (argv.coverage) {
-        generate_coverage(src);
+        generate_coverage(['lib']);
 
         if (!/cov/.test(argv.reporter)) {
             argv.reporter = 'html-cov';

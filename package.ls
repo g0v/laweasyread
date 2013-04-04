@@ -6,7 +6,7 @@ contributors:
 descritpion: 'API for Taiwan law'
 scripts:
     prepublish: "node prepublish.js"
-    start: "node server/start.js"
+    start: "node start.js"
     test: "node test.js"
 dependencies:
     async: \~0.2.6
