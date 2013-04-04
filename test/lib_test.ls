@@ -33,16 +33,14 @@ const DATA =
       roman: \M
 
 describe "Test roman to integer", ->
-    describe "Good roman", ->
+    test "Good roman", (done) ->
         for data in DATA
-            test "#{data.roman} should be #{data.decimal}", (done) ->
-                parse.roman_to_integer data.roman.toUpperCase! .should.equal data.decimal
-                parse.roman_to_integer data.roman.toLowerCase! .should.equal data.decimal
-                done!
+            parse.roman_to_integer data.roman.toUpperCase! .should.equal data.decimal
+            parse.roman_to_integer data.roman.toLowerCase! .should.equal data.decimal
+        done!
 
 describe "Test integer to roman", ->
-    describe "Good integer", ->
+    test "Good integer", (done) ->
         for data in DATA
-            test "#{data.decimal} should be #{data.roman}", (done) ->
-                parse.integer_to_roman data.decimal .should.equal data.roman
-                done!
+            parse.integer_to_roman data.decimal .should.equal data.roman
+        done!
