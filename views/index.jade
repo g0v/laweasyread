@@ -6,7 +6,7 @@ block navbar
             .brand laweasyread
 block querybox
     .search-query
-        input(id="query", autofocus, placeholder="請輸入法律名稱")
+        input(id="query", autofocus, autocomplete="off", placeholder="請輸入法律名稱", ng-model="lawQuery", data-provide="typeahead")
 
 block content
     #lawcontent
