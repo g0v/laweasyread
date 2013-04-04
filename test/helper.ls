@@ -44,7 +44,7 @@ deleteDatabase = (mongo_uri, callback) ->
 
 startServer = (data, callback) ->
     # FIXME: Assume port is available
-    port = 10000 + Math.round Math.random! * 10000
+    port = getRandomNumber 10000, 20000
 
     host = "http://localhost:#port/"
 
