@@ -1,4 +1,5 @@
 require!{async, child_process, mongodb}
+laweasyread = require \../
 
 servers = {};
 databases = {};
@@ -10,6 +11,7 @@ getRandomNumber = (min, max) ->
     min + Math.round Math.random! * (max - min)
 
 createDatabase = (data, callback) ->
+    # FIXME: Assume there is nothing important in this database.
     mongo_uri = "mongodb://localhost/test-laweasyread-" +
         getRandomNumber 0, 999999
 
@@ -40,8 +42,8 @@ deleteDatabase = (mongo_uri, callback) ->
 
     callback null
 
-exports.start_server = (data, callback) ->
-    # FIXME: Assume port and collection are available
+startServer = (data, callback) ->
+    # FIXME: Assume port is available
     port = 10000 + Math.round Math.random! * 10000
 
     host = "http://localhost:#port/"
@@ -49,22 +51,25 @@ exports.start_server = (data, callback) ->
     (err, mongo_uri) <- createDatabase data
     if err => callback err, null; return
 
-    child = child_process.spawn \node, ["#__dirname/../start.js"
-        \--mongo_uri, mongo_uri,
-        \--port, port]
+    (err, server) <- laweasyread.server.start {
+        mongo_uri: mongo_uri
+        port: port
+    }
 
-    child.stdout.on \data, (data) ->
-        if data.toString! == /application started/
-            servers[host] =
-                mongo_uri: mongo_uri
-                process: child
-            callback null, host
+    servers[host] =
+        server: server
+        mongo_uri: mongo_uri
 
-exports.stop_server = (host, callback) ->
+    callback null, host
+
+stopServer = (host, callback) ->
     server = servers[host]
-    server.process.kill!
 
+    server.server.close!
     (err) <- deleteDatabase server.mongo_uri
     if err => callback err; return
 
     callback null
+
+exports.startServer = startServer
+exports.stopServer = stopServer

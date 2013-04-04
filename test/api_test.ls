@@ -25,7 +25,7 @@ host = void
 
 before (done) ->
     this.timeout 10000
-    (err, str) <- helper.start_server DATA
+    (err, str) <- helper.startServer DATA
     should.not.exist err
     host := str
     done!
@@ -60,5 +60,5 @@ describe "Test /api/suggestion/", ->
             done!
 
 after (done) ->
-    (err) <- helper.stop_server host
+    (err) <- helper.stopServer host
     done!
