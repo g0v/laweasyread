@@ -18,7 +18,9 @@ get_api_callback = (info) ->
             ret = info.default
         res.jsonp ret
 
-exports.start = (config) ->
+exports.start = (config, callback) ->
+    if callback == void => callback = ->
+
     config.views_dir = config.views_dir or "#__dirname/../views"
     config.static_dir = config.static_dir or "#__dirname/../public"
 
@@ -51,5 +53,7 @@ exports.start = (config) ->
         console.error(err.stack);
         res.render \500.jade
 
-    <- http.createServer app .listen config.port
+    server = http.createServer app
+    <- server.listen config.port
     console.log "application started on port #{config.port}"
+    callback null, server
