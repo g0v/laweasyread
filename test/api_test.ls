@@ -56,7 +56,7 @@ describe "Test /api/suggestion/", ->
         test "憲", (done) ->
             (err, rsp, body) <- request { uri: host + \api/suggestion/憲 }
             should.not.exist err
-            JSON.parse body .should.eql [\中華民國憲法]
+            JSON.parse body .should.eql [{"law":"中華民國憲法"}]
             done!
 
 describe "Test bad occation", ->
