@@ -95,6 +95,7 @@ exports.getSuggestion = (params, cb) ->
         if statute.name != void
             for name in statute.name
                 if typeof name.name == \string and name.name != ""
-                    suggestion.push name.name
+                    strJson = '{"law":"'+ name.name + '"}'
+                    strJson |> JSON.parse |> suggestion.push
 
     cb null, suggestion
