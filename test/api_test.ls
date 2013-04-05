@@ -59,6 +59,14 @@ describe "Test /api/suggestion/", ->
             JSON.parse body .should.eql [\中華民國憲法]
             done!
 
+describe "Test bad occation", ->
+    describe "404 page", ->
+        test "get the 404 page", (done) ->
+            (err, rsp, body) <- request { uri: host + \api/bad-api-xxx }
+            should.not.exist err
+            body.indexOf('Sorry').should.not.be.below(0)
+            done!
+
 after (done) ->
     (err) <- helper.stopServer host
     done!
