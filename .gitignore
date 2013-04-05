@@ -1,5 +1,6 @@
 *.js
 *.swp
+report.html
 
 /node_modules
 
