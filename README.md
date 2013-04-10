@@ -2,6 +2,38 @@
 [![Build Status](https://travis-ci.org/g0v/laweasyread.png)](https://travis-ci.org/g0v/laweasyread)
 [![Dependencies Status](https://gemnasium.com/g0v/laweasyread.png)](https://gemnasium.com/g0v/laweasyread)
 
+# API
+All APIs support [JSONP](http://en.wikipedia.org/wiki/JSONP) so it can be
+called with callback parameter.
+
+## /api/law/:query
+This API returns law information. Thq query shall be a full law name like
+`中華民國憲法`. The return is a JSON with the following information:
+
+    {
+        'isSuccess': boolean // This API call is success or not
+        'law': { // Will not exist if IsSuccess is false
+            'name': [ // Name of law might be changed, so it is an array to record all its names.
+                {
+                    'name': string // Name of law
+                    'date': string // Start date of name in ISO-8601 (2013-03-31).
+                }
+            ]
+            'history': // TBD
+            'lyID': string // lyID is used in http://lis.ly.gov.tw/lgcgi/lglaw
+            'PCode': string // PCode is used in http://law.moj.gov.tw/
+        }
+    }
+
+## /api/article/:query
+TBD
+
+## /api/statute/:query
+TBD
+
+## /api/suggestion/:query
+TBD
+
 # Environment Variable
 
 ## LAWEASYREAD\_COV
