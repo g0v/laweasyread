@@ -28,16 +28,17 @@ This API returns law information. Thq query shall be a full law name like
         }
     }
 
-## /api/statute/:query
+## /api/article/:query
 This API returns article in law.
 
 The following is return JSON:
 
     {
-        'article': string // Article no. The format is \d+(-\d+)
-        'content': string // Article content. The leading two whitespaces are removed.
-        'lyID': string // lyID is used in http://lis.ly.gov.tw/lgcgi/lglaw
-        'passed_date': string // Article passed date.
+        'isSuccess': boolean // This API call is success or not
+        'reason': string // API fail reason. Not exist if isSuccess is true
+        'article': { // Will not exist if isSuccess is false
+            'content': string // Article content. The leading two whitespaces are removed.
+        }
     }
 
 ## /api/suggestion/:query

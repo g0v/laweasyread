@@ -2,18 +2,6 @@ require!{express, http, \./route}
 STATIC_URI = \/
 
 const API_URI = \/api
-const API_TABLE =
-    \statute/:query :
-        func: route.getStatute
-        default: {}
-
-get_api_callback = (info) ->
-    (req, res) ->
-        (err, ret) <- info.func req.params
-        if err
-            console.error err
-            ret = info.default
-        res.jsonp ret
 
 exports.start = (config, callback) ->
     if callback == void => callback = ->
@@ -37,11 +25,9 @@ exports.start = (config, callback) ->
         (req, res) <- app.get STATIC_URI
         res.render \index
 
+    app.get "#API_URI/article/:query", route.getArticle
     app.get "#API_URI/law/:query", route.getLaw
     app.get "#API_URI/suggestion/:query", route.getSuggestion
-
-    for api, info of API_TABLE
-        app.get "#API_URI/#api", get_api_callback info
 
 # error handling
     do

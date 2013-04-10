@@ -54,25 +54,29 @@ describe 'Test /api/law', ->
             JSON.parse body .isSuccess .should.be.false
             done!
 
-describe "Test /api/statute/", ->
-    describe "Good input", ->
-        test "中華民國憲法_1", (done) ->
-            (err, rsp, body) <- request { uri: host + \api/statute/中華民國憲法_1 }
+describe 'Test /api/article/:query' , ->
+    describe 'Good input', ->
+        test '中華民國憲法_1', (done) ->
+            (err, rsp, body) <- request { uri: host + \api/article/中華民國憲法_1 }
             should.not.exist err
-            JSON.parse body .content .should.eql DATA.article[0].content
+            JSON.parse body .should.eql {
+                isSuccess: true
+                article:
+                    content: DATA.article[0].content
+            }
             done!
 
-    describe "Bad input", ->
-        test "中華民國憲法_", (done) ->
-            (err, rsp, body) <- request { uri: host + \api/statute/中華民國憲法_ }
+    describe 'Bad input', ->
+        test '中華民國憲法_', (done) ->
+            (err, rsp, body) <- request { uri: host + \api/article/中華民國憲法_ }
             should.not.exist err
-            JSON.parse body .should.eql {}
+            JSON.parse body .isSuccess .should.be.false
             done!
 
-        test "憲法_1", (done) ->
-            (err, rsp, body) <- request { uri: host + \api/statute/憲法_1 }
+        test '憲法_1', (done) ->
+            (err, rsp, body) <- request { uri: host + \api/article/憲法_1 }
             should.not.exist err
-            JSON.parse body .should.eql {}
+            JSON.parse body .isSuccess .should.be.false
             done!
 
 describe 'Test /api/suggestion/', ->

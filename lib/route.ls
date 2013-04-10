@@ -15,56 +15,51 @@ chainCloseDB = (db, cb) ->
         db.close!
         cb err, res
 
-exports.getStatute = (params, cb) ->
-    m = /^([^_]+)_(\d+)$/ .exec params.query
-    if not m
-        cb new Error "query string format error", null
-        return
+exports.getArticle = (req, rsp) ->
+    callback = (err, article) ->
+        if err
+            rsp.jsonp {
+                isSuccess: false
+                reason: err.toString!
+            }
+        else
+            rsp.jsonp {
+                isSuccess: true
+                article: article
+            }
+
+    m = /^([^_]+)_([\d-]+)$/.exec req.params.query
+    if not m => return callback new Error "query string #{req.params.query} format error"
 
     name = m.1
     article = m.2
-    console.log "query statue `#name' article `#article'"
 
     err, db <- mongodb.Db.connect mongoUri
-    if err
-        cb err, null
-        return
-    cb := chainCloseDB db, cb
+    if err => return callback err
+    callback := chainCloseDB db, callback
 
     err, collection <- db.collection STATUTE
-    if err
-        cb err, null
-        return
+    if err => return callback err
 
     err, data <- collection.find { name: $elemMatch: { name: name } } .toArray
-    if err
-        cb err, null
-        return
+    if err => return callback err
 
-    if data.length == 0
-        cb null, {}
-        return
+    if data.length != 1 => return callback new Error "Cannot find law #name"
 
     lyID = data[0].lyID
 
     err, collection <- db.collection ARTICLE
-    if err
-        cb err, null
-        return
+    if err => return callback err
 
     err, data <- collection.find { lyID: lyID, article: article } .toArray
-    if err
-        cb err, null
-        return
+    if err => return callback err
 
-    if data.length == 0
-        cb null, {}
-        return
+    if data.length != 1 => return callback new Error "Cannot find law #name artcile #article"
 
-    res =
+    ret =
         content: data[0].content
 
-    cb null, res
+    return callback null, ret
 
 exports.getSuggestion = (req, rsp) ->
     callback = (err, suggestion) ->
