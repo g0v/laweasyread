@@ -1,13 +1,13 @@
-require!{express, http, \./db}
+require!{express, http, \./route}
 STATIC_URI = \/
 
 const API_URI = \/api
 const API_TABLE =
     \statute/:query :
-        func: db.getStatute
+        func: route.getStatute
         default: {}
     \suggestion/:query :
-        func: db.getSuggestion
+        func: route.getSuggestion
         default: []
 
 get_api_callback = (info) ->
@@ -34,13 +34,13 @@ exports.start = (config, callback) ->
     console.log "static dir is #{config.static_dir}"
     app.use express.static config.static_dir
 
-    db.setMongoUri config.mongo_uri
+    route.setMongoUri config.mongo_uri
 
     do
         (req, res) <- app.get STATIC_URI
         res.render \index
 
-    app.get "#API_URI/law/:query", db.getLaw
+    app.get "#API_URI/law/:query", route.getLaw
 
     for api, info of API_TABLE
         app.get "#API_URI/#api", get_api_callback info
