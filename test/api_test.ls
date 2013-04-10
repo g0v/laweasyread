@@ -37,7 +37,7 @@ describe 'Test /api/law', ->
             (err, rsp, body) <- request { uri: host + \api/law/中華民國憲法 }
             should.not.exist err
             JSON.parse body .should.eql {
-                isSuccess: false,
+                isSuccess: true,
                 law:
                     name:
                         * name: \中華民國憲法
