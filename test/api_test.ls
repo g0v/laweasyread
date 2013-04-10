@@ -13,6 +13,7 @@ const DATA =
               enforcement_date: \1947.12.25
             ...
           lyID: \04101
+          PCode: \A0000001
         ...
     article:
         * article: \1
@@ -29,6 +30,29 @@ before (done) ->
     should.not.exist err
     host := str
     done!
+
+describe 'Test /api/law', ->
+    describe 'Good input', ->
+        test '中華民國憲法', (done) ->
+            (err, rsp, body) <- request { uri: host + \api/law/中華民國憲法 }
+            should.not.exist err
+            JSON.parse body .should.eql {
+                isSuccess: false,
+                law:
+                    name:
+                        * name: \中華民國憲法
+                          start_date: \1946-12-25
+                        ...
+                    lyID: \04101
+                    PCode: \A0000001
+            }
+            done!
+    describe 'Bad input', ->
+        test '中華民國', (done) ->
+            (err, rsp, body) <- request { uri: host + \api/law/中華民國 }
+            should.not.exist err
+            JSON.parse body .isSuccess .should.be.false
+            done!
 
 describe "Test /api/statute/", ->
     describe "Good input", ->

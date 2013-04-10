@@ -40,6 +40,8 @@ exports.start = (config, callback) ->
         (req, res) <- app.get STATIC_URI
         res.render \index
 
+    app.get "#API_URI/law/:query", db.getLaw
+
     for api, info of API_TABLE
         app.get "#API_URI/#api", get_api_callback info
 

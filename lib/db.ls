@@ -99,3 +99,41 @@ exports.getSuggestion = (params, cb) ->
                     json |> suggestion.push
 
     cb null, suggestion
+
+exports.getLaw = (req, rsp) ->
+    callback = (err, law) ->
+        if err
+            rsp.jsonp {
+                isSuccess: false
+                reason: err.toString!
+            }
+        else
+            rsp.jsonp {
+                isSuccess: false,
+                law: law
+            }
+
+    lawName = req.params.query
+
+    err, db <- mongodb.Db.connect mongoUri
+    if err => return callback err
+    callback := chainCloseDB db, callback
+
+    err, collection <- db.collection STATUTE
+    if err => return callback err
+
+    err, law <- collection.find {
+        name: $elemMatch: { name: lawName } } .toArray!
+    if err => return callback err
+
+    if law.length != 1
+        return callback new Error "Found #{law.length} when query law name #lawName"
+
+    law = law[0]
+
+    ret =
+        name: law.name
+        lyID: law.lyID
+        PCode: law.PCode
+
+    return callback null, ret
