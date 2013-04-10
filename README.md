@@ -6,6 +6,8 @@
 All APIs support [JSONP](http://en.wikipedia.org/wiki/JSONP) so it can be
 called with callback parameter.
 
+The date related fields in JSON are all ISO-8601 format (ex: 2013-03-31).
+
 ## /api/law/:query
 This API returns law information. Thq query shall be a full law name like
 `中華民國憲法`. The return is a JSON with the following information:
@@ -16,7 +18,7 @@ This API returns law information. Thq query shall be a full law name like
             'name': [ // Name of law might be changed, so it is an array to record all its names.
                 {
                     'name': string // Name of law
-                    'date': string // Start date of name in ISO-8601 (2013-03-31).
+                    'date': string // Start date of name
                 }
             ]
             'history': // TBD
@@ -25,14 +27,29 @@ This API returns law information. Thq query shall be a full law name like
         }
     }
 
-## /api/article/:query
-TBD
-
 ## /api/statute/:query
-TBD
+This API returns article in law.
+
+The following is return JSON:
+
+    {
+        'article': string // Article no. The format is \d+(-\d+)
+        'content': string // Article content. The leading two whitespaces are removed.
+        'lyID': string // lyID is used in http://lis.ly.gov.tw/lgcgi/lglaw
+        'passed_date': string // Article passed date.
+    }
 
 ## /api/suggestion/:query
-TBD
+This API returns possible law names from query.
+
+The following is return JSON:
+
+    [
+        {
+            'law': string // law name
+        }
+        ...
+    ]
 
 # Environment Variable
 
