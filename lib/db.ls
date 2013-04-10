@@ -109,7 +109,7 @@ exports.getLaw = (req, rsp) ->
             }
         else
             rsp.jsonp {
-                isSuccess: false,
+                isSuccess: true,
                 law: law
             }
 
