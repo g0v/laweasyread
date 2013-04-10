@@ -14,7 +14,8 @@ This API returns law information. Thq query shall be a full law name like
 
     {
         'isSuccess': boolean // This API call is success or not
-        'law': { // Will not exist if IsSuccess is false
+        'reason': string // API fail reason. Not exist if isSuccess is true
+        'law': { // Will not exist if isSuccess is false
             'name': [ // Name of law might be changed, so it is an array to record all its names.
                 {
                     'name': string // Name of law
@@ -44,12 +45,15 @@ This API returns possible law names from query.
 
 The following is return JSON:
 
-    [
-        {
-            'law': string // law name
-        }
-        ...
-    ]
+    {
+        'isSuccess': boolean // This API call is success or not
+        'reason': string // API fail reason. Not exist if isSuccess is true
+        'suggestion': [ // Will not exist if IsSuccess is false
+            {
+                'law': string // law name
+            }
+            ...
+        ]
 
 # Environment Variable
 
