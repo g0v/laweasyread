@@ -70,12 +70,12 @@ exports.getSuggestion = (req, rsp) ->
     callback = (err, suggestion) ->
         if err
             rsp.jsonp {
-                isSuccess: false,
+                isSuccess: false
                 reason: err.toString!
             }
         else
             rsp.jsonp {
-                isSuccess: true,
+                isSuccess: true
                 suggestion: suggestion
             }
 
@@ -100,10 +100,10 @@ exports.getSuggestion = (req, rsp) ->
     for law in data
         if law.name != void
             for name in law.name
-                suggestion.push {
-                    law: name.name
-                }
-    callback null, suggestion
+                suggestion.push { law: name.name }
+
+    return callback null, suggestion
+
 
 exports.getLaw = (req, rsp) ->
     callback = (err, law) ->
