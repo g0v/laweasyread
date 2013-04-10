@@ -6,9 +6,6 @@ const API_TABLE =
     \statute/:query :
         func: route.getStatute
         default: {}
-    \suggestion/:query :
-        func: route.getSuggestion
-        default: []
 
 get_api_callback = (info) ->
     (req, res) ->
@@ -41,6 +38,7 @@ exports.start = (config, callback) ->
         res.render \index
 
     app.get "#API_URI/law/:query", route.getLaw
+    app.get "#API_URI/suggestion/:query", route.getSuggestion
 
     for api, info of API_TABLE
         app.get "#API_URI/#api", get_api_callback info

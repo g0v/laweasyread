@@ -66,39 +66,44 @@ exports.getStatute = (params, cb) ->
 
     cb null, res
 
-exports.getSuggestion = (params, cb) ->
-    keyword = params.query
-    console.log "suggestion keyword is `#keyword'"
+exports.getSuggestion = (req, rsp) ->
+    callback = (err, suggestion) ->
+        if err
+            rsp.jsonp {
+                isSuccess: false,
+                reason: err.toString!
+            }
+        else
+            rsp.jsonp {
+                isSuccess: true,
+                suggestion: suggestion
+            }
+
+    # FIXME: How to validate regex to prevent regex bomb?
+    keyword = req.params.query
 
     err, db <- mongodb.Db.connect mongoUri
-    if err
-        cb err, null
-        return
-    cb := chainCloseDB db, cb
+    if err => return callback err
+    callback := chainCloseDB db, callback
 
     err, collection <- db.collection STATUTE
-    if err
-        cb err, null
-        return
+    if err => return callback err
 
-    err, data <- collection.find { name: $elemMatch: { name: { $regex: keyword } } } .toArray!
-    if err
-        cb err, null
-        return
+    cursor = collection.find {
+        name: $elemMatch: { name: { $regex: keyword } } },
+        { name: true }
 
-    if data.length == 0
-        cb null, []
-        return
+    err, data <- cursor.limit 10 .toArray
+    if err => return callback err
 
     suggestion = []
-    for statute in data
-        if statute.name != void
-            for name in statute.name
-                if typeof name.name == \string and name.name != ""
-                    json = {"law": name.name }
-                    json |> suggestion.push
-
-    cb null, suggestion
+    for law in data
+        if law.name != void
+            for name in law.name
+                suggestion.push {
+                    law: name.name
+                }
+    callback null, suggestion
 
 exports.getLaw = (req, rsp) ->
     callback = (err, law) ->
@@ -109,7 +114,7 @@ exports.getLaw = (req, rsp) ->
             }
         else
             rsp.jsonp {
-                isSuccess: true,
+                isSuccess: true
                 law: law
             }
 

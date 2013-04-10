@@ -75,12 +75,17 @@ describe "Test /api/statute/", ->
             JSON.parse body .should.eql {}
             done!
 
-describe "Test /api/suggestion/", ->
-    describe "Good input", ->
-        test "憲", (done) ->
+describe 'Test /api/suggestion/', ->
+    describe 'Good input', ->
+        test '憲', (done) ->
             (err, rsp, body) <- request { uri: host + \api/suggestion/憲 }
             should.not.exist err
-            JSON.parse body .should.eql [{"law":"中華民國憲法"}]
+            JSON.parse body .should.eql {
+                isSuccess: true
+                suggestion:
+                    * law: \中華民國憲法
+                    ...
+            }
             done!
 
 describe "Test bad occation", ->
