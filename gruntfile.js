@@ -7,7 +7,6 @@ module.exports = function(grunt) {
     var bin = ['node_modules', '.bin'].join(path.sep);
 
     var lsc = [bin, 'lsc'].join(path.sep);
-    var mocha = [bin, 'mocha'].join(path.sep);
     var npm = 'npm';
 
     grunt.registerTask('livescript_src', 'update LiveScript source', function () {
@@ -15,7 +14,7 @@ module.exports = function(grunt) {
         // FIXME: Compile changed file only
         shell.exec(lsc + ' -c lib');
         shell.exec(lsc + ' -c test');
-        grunt.task.run('mocha');
+        grunt.task.run('test');
         done();
     });
 
@@ -26,9 +25,9 @@ module.exports = function(grunt) {
         done();
     });
 
-    grunt.registerTask('mocha', 'run mocha', function () {
+    grunt.registerTask('test', 'run test', function () {
         var done = this.async();
-        shell.exec(mocha);
+        shell.exec(npm + ' test');
         done();
     });
 
