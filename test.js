@@ -59,6 +59,7 @@ var find_all_test_scripts = function () {
 
     var cmd = [mocha,
         '--no-colors',
+        '--growl',
         '--reporter', argv.reporter];
     cmd = cmd.concat(find_all_test_scripts());
 

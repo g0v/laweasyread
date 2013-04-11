@@ -20,6 +20,7 @@ dependencies:
 engines:
     node: \0.10.x
 devDependencies:
+    growl: \~1.7.0
     grunt: \~0.4.1
     \grunt-contrib-watch : \~0.3.1
     jscoverage: \~0.3.6
