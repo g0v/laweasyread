@@ -56,6 +56,12 @@ The following is return JSON:
             ...
         ]
 
+# Grunt
+The project uses [Grunt](http://gruntjs.com/) to compile LiveScript into
+JavaScript. Use the following command to use this feature:
+
+    grunt watch
+
 # Environment Variable
 
 ## LAWEASYREAD\_COV
