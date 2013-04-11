@@ -57,10 +57,20 @@ The following is return JSON:
         ]
 
 # Grunt
-The project uses [Grunt](http://gruntjs.com/) to compile LiveScript into
-JavaScript. Use the following command to use this feature:
+The project uses [Grunt](http://gruntjs.com/) to do the following tasks when
+source file changed:
 
-    grunt watch
+* Compile package.ls and run `npm install`
+* Compile LiveScript source and run `mocha`
+
+In order to use this feature, you need to install
+[grunt-cli](https://npmjs.org/package/grunt-cli) with the following command:
+
+    npm install -g grunt-cli
+
+After that, you can use the following command to monitor file changed:
+
+    grunt
 
 # Environment Variable
 
