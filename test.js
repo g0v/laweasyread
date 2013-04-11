@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var optimist = require('optimist');
 var path = require('path');
@@ -23,12 +23,18 @@ var create_cov_dst_path = function (src) {
 };
 
 var generate_coverage = function (src) {
-    var all_js = shell.find(src).filter(function (file) { return /\.js$/.test(file); });
+    var all_js = shell.find(src).filter(function (file) {
+        return /\.js$/.test(file); });
     for (var i = 0; i < all_js.length; ++i) {
         shell.exec([
             jscoverage, all_js[i], create_cov_dst_path(all_js[i])
         ].join(' '));
     }
+};
+
+var find_all_test_scripts = function () {
+    return shell.find('test').filter(function (file) {
+        return /_mocha\.js$/.test(file); } );
 };
 
 (function () {
@@ -51,6 +57,10 @@ var generate_coverage = function (src) {
         process.env.LAWEASYREAD_COV = true;
     }
 
-    var ret = shell.exec(mocha + ' --no-colors --reporter ' + argv.reporter);
-    shell.exit(ret.code);
+    var cmd = [mocha,
+        '--no-colors',
+        '--reporter', argv.reporter];
+    cmd = cmd.concat(find_all_test_scripts());
+
+    shell.exit(shell.exec(cmd.join(' ')));
 })();
