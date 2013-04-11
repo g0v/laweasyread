@@ -30,6 +30,7 @@ devDependencies:
 licenses:
     * type: \MIT
       url: \https://github.com/g0v/laweasyread/blob/master/LICENSE
+      ...
 repository:
     type: \git
     url: \http://github.com/g0v/laweasyread
