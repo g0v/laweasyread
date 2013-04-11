@@ -4,6 +4,7 @@ report.html
 
 /node_modules
 
+!/gruntfile.js
 !/index.js
 !/prepublish.js
 !/start.js

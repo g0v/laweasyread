@@ -20,6 +20,8 @@ dependencies:
 engines:
     node: \0.10.x
 devDependencies:
+    grunt: \~0.4.1
+    \grunt-contrib-watch : \~0.3.1
     jscoverage: \~0.3.6
     LiveScript: \1.1.x
     mocha: \~1.8.2
