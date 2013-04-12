@@ -28,6 +28,8 @@ devDependencies:
     mocha: \~1.8.2
     request: \~2.16.6
     should: \1.2.x
+    karma: \0.8.4
+    chai: \1.5.0
 licenses:
     * type: \MIT
       url: \https://github.com/g0v/laweasyread/blob/master/LICENSE
