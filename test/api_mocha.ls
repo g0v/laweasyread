@@ -1,5 +1,6 @@
-require!{request, should, \./helper}
+require!{chai, request, \./helper}
 test = it
+should = chai.should!
 
 const DATA =
     statute:

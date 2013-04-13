@@ -1,5 +1,6 @@
-require!{should}
+require!<[chai]>
 test = it
+should = chai.should!
 
 parse = require \.. .parse
 

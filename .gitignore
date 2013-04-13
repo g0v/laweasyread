@@ -4,6 +4,7 @@ report.html
 
 /node_modules
 
+!/karma.conf.js
 !/gruntfile.js
 !/index.js
 !/prepublish.js
