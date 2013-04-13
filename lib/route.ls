@@ -1,4 +1,4 @@
-require!{mongodb}
+require!<[mongodb winston]>
 
 # mongodb collection name
 const ARTICLE = \article
@@ -7,7 +7,7 @@ const STATUTE = \statute
 mongoUri = void
 
 exports.setMongoUri = ->
-    console.log "Set mongoUri to #it"
+    winston.info "Set mongoUri to #it"
     mongoUri := it
 
 chainCloseDB = (db, cb) ->

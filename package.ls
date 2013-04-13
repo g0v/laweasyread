@@ -29,6 +29,7 @@ devDependencies:
     LiveScript: \1.1.x
     mocha: \~1.8.2
     request: \~2.16.6
+    winston: \~0.6.2
 licenses:
     * type: \MIT
       url: \https://github.com/g0v/laweasyread/blob/master/LICENSE
