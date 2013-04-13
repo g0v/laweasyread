@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function(grunt) {
+    var growl = require('growl');
     var path = require('path');
     var shell = require('shelljs');
 
@@ -22,6 +23,7 @@ module.exports = function(grunt) {
         var done = this.async();
         shell.exec(lsc + ' -cj package.ls');
         shell.exec(npm + ' install');
+        growl('Update package.ls', { title: 'Completed' });
         done();
     });
 
