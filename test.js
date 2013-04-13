@@ -4,11 +4,12 @@ var optimist = require('optimist');
 var path = require('path');
 var shell = require('shelljs');
 
-var bin = ['./node_modules', '.bin'].join(path.sep);
+var bin = path.join('node_modules', '.bin');
 
-var lsc = [bin, 'lsc'].join(path.sep);
-var mocha = [bin, 'mocha'].join(path.sep);
-var jscoverage = [bin, 'jscoverage'].join(path.sep);
+var karma = path.join(bin, 'karma');
+var lsc = path.join(bin, 'lsc');
+var mocha = path.join(bin, 'mocha');
+var jscoverage = path.join(bin, 'jscoverage');
 
 var compile = function (src) {
     for (var i = 0; i < src.length; ++i) {
@@ -38,10 +39,12 @@ var find_all_test_scripts = function () {
 };
 
 (function () {
-    var argv = optimist
+    var argv, cmd, ret;
+
+    argv = optimist
         .boolean(['coverage'])
         .default({
-            'reporter': 'spec'
+            'reporter': 'dot'
         })
         .argv;
 
@@ -57,11 +60,19 @@ var find_all_test_scripts = function () {
         process.env.LAWEASYREAD_COV = true;
     }
 
-    var cmd = [mocha,
+    cmd = [mocha,
         '--no-colors',
         '--growl',
         '--reporter', argv.reporter];
     cmd = cmd.concat(find_all_test_scripts());
 
-    shell.exit(shell.exec(cmd.join(' ')));
+    ret = shell.exec(cmd.join(' '));
+    if (ret.code !== 0) shell.exit(ret.code);
+
+    cmd = [karma, 'start',
+        '--single-run',
+        '--browsers', 'PhantomJS'];
+
+    ret = shell.exec(cmd.join(' '));
+    if (ret.code !== 0) shell.exit(ret.code);
 })();
