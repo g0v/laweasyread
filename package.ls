@@ -17,6 +17,7 @@ dependencies:
     optimist: \~0.3.5
     \romanize-component : \0.1.x
     shelljs: \~0.1.2
+    winston: \~0.6.2
 engines:
     node: \0.10.x
 devDependencies:
@@ -29,7 +30,6 @@ devDependencies:
     LiveScript: \1.1.x
     mocha: \~1.8.2
     request: \~2.16.6
-    winston: \~0.6.2
 licenses:
     * type: \MIT
       url: \https://github.com/g0v/laweasyread/blob/master/LICENSE
