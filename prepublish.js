@@ -1,11 +1,10 @@
-"use strict";
-var shell = require('shelljs');
+'use strict';
 var path = require('path');
+var shell = require('shelljs');
 
-var lsc = ['node_modules', '.bin', 'lsc'].join(path.sep);
-var jade = ['node_modules', '.bin', 'jade'].join(path.sep);
+var bin = path.join('node_modules', '.bin');
 
-shell.exec(lsc + " -cj package.ls");
+var lsc = path.join(bin, 'lsc');
 
-shell.exec(lsc + " -c lib");
-shell.exec(lsc + " -c public");
+shell.exec([lsc, '-cj', 'package.ls'].join(' '));
+shell.exec([lsc, '-c', 'lib', path.join('public', 'js')].join(' '));
