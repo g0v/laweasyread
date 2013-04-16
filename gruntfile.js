@@ -13,30 +13,29 @@ module.exports = function(grunt) {
     grunt.registerTask('livescript_src', 'update LiveScript source', function () {
         var done = this.async();
         // FIXME: Compile changed file only
-        shell.exec(lsc + ' -c lib');
-        shell.exec(lsc + ' -c test');
+        shell.exec([npm, 'run', 'prepublish'].join(' '));
         grunt.task.run('test');
         done();
     });
 
     grunt.registerTask('package_ls', 'update package.ls', function () {
         var done = this.async();
-        shell.exec(lsc + ' -cj package.ls');
-        shell.exec(npm + ' install');
+        shell.exec([lsc, '-cj', 'package.ls'].join(' '));
+        shell.exec([npm, 'install'].join(' '));
         growl('Update package.ls', { title: 'Completed' });
         done();
     });
 
     grunt.registerTask('test', 'run test', function () {
         var done = this.async();
-        shell.exec(npm + ' test');
+        shell.exec([npm, 'test'].join(' '));
         done();
     });
 
     grunt.initConfig({
         watch: {
             livescript_src: {
-                files: ['lib/**/*.ls', 'test/**/*.ls'],
+                files: ['lib/**/*.ls', 'test/**/*.ls', 'public/js/**/*.ls'],
                 tasks: ['livescript_src']
             },
             package_ls: {
