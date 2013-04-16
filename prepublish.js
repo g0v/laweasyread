@@ -7,4 +7,4 @@ var bin = path.join('node_modules', '.bin');
 var lsc = path.join(bin, 'lsc');
 
 shell.exec([lsc, '-cj', 'package.ls'].join(' '));
-shell.exec([lsc, '-c', 'lib', path.join('public', 'js')].join(' '));
+shell.exec([lsc, '-c', 'lib', 'test', path.join('public', 'js')].join(' '));
