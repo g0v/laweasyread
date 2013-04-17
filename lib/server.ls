@@ -10,6 +10,7 @@ exports.start = (config, callback) ->
         .remove winston.transports.Console
         .add winston.transports.File, { filename: "#__dirname/../log" }
 
+    # Default values if not set.
     config.views_dir = config.views_dir or "#__dirname/../views"
     config.static_dir = config.static_dir or "#__dirname/../public"
 
@@ -24,18 +25,20 @@ exports.start = (config, callback) ->
     }
 
     app.use express.compress!
-    app.use(express.favicon());
-    app.set \views config.views_dir
-    app.set 'view engine' 'jade'
+    app.use express.favicon!
+
+    app.set \views, config.views_dir
+    app.set 'view engine', 'jade'
+    app.locals.pretty = config.dev
 
     winston.info "static dir is #{config.static_dir}"
     app.use express.static config.static_dir
 
-    route.setMongoUri config.mongo_uri
-
-    do
-        (req, res) <- app.get STATIC_URI
+    app.get STATIC_URI, (req, res) ->
         res.render \index
+
+    route.setMongoUri config.mongo_uri
+    app.set 'json spaces', if config.dev => 4 else 0
 
     app.get "#API_URI/article/:query", route.getArticle
     app.get "#API_URI/law/:query", route.getLaw
