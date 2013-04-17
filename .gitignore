@@ -10,5 +10,4 @@ report.html
 !/prepublish.js
 !/start.js
 !/test.js
-!/public/js/bootstrap.min.js
-!/public/js/jquery-1.9.1.min.js
+!/public/js/lib/*.js

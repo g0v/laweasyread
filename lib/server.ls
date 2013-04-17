@@ -35,7 +35,7 @@ exports.start = (config, callback) ->
     app.use express.static config.static_dir
 
     app.get STATIC_URI, (req, res) ->
-        res.render \index
+        res.render \index, { dev: config.dev }
 
     route.setMongoUri config.mongo_uri
     app.set 'json spaces', if config.dev => 4 else 0
