@@ -6,7 +6,13 @@ block navbar
             .brand laweasyread
 block querybox
     .search-query
-        input(id="query", autofocus, autocomplete="off", placeholder="請輸入法律名稱", ng-model="lawSelected", typeahead="law for law in laws | filter:$viewValue | limitTo:10")
+        input(id='query'
+            ng-model = 'lawSelected'
+            typeahead = 'law for law in laws | filter:$viewValue | limitTo:10'
+            autofocus
+            autocomplete = 'off'
+            placeholder = '請輸入法律名稱'
+        )
 
 block content
     #lawcontent
