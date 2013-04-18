@@ -1,5 +1,5 @@
 
- angular.module \laweasyreadControllers, [] .controller \TypeaheadCtrl ($scope, $resource)->  
+ angular.module \laweasyread.controllers, [] .controller \TypeaheadCtrl ($scope, $resource)->
     # $scope.laws_stub = ['PHP', 'MySQL', 'SQL', 'PostgreSQL', 'HTML', 'CSS', 'HTML5', 'CSS3', 'JSON']
     Suggestions = $resource '/api/suggestion/:query'
     $scope.laws = []
