@@ -8,10 +8,23 @@ basePath = './';
 
 // list of files / patterns to load in the browser
 files = [
-  MOCHA,
-  MOCHA_ADAPTER,
-  'node_modules/chai/chai.js',
-  'test/e2e/foo.js',
+  JASMINE,
+  JASMINE_ADAPTER,
+
+  // lib
+  'public/js/lib/angular.js',
+  'public/js/lib/angular-resource.js',
+  'public/js/lib/ui-bootstrap-tpls-0.2.0.js',
+
+  // test lib
+  'test/lib/angular/angular-mocks.js',
+
+  // app
+  'public/js/*.js',
+
+
+  // test
+  'test/unit/*.js'
 ];
 
 

@@ -10,4 +10,5 @@ report.html
 !/prepublish.js
 !/start.js
 !/test.js
+!/test/lib/angular/*.js
 !/public/js/lib/*.js
