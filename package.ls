@@ -17,7 +17,7 @@ dependencies:
     optimist: \~0.3.5
     \romanize-component : \0.1.x
     shelljs: \~0.1.2
-    winston: \~0.6.2
+    winston: \~0.7.1
 engines:
     node: \0.10.x
 devDependencies:
