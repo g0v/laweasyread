@@ -17,4 +17,7 @@ block querybox
 block content
     #lawcontent
         .well
-            h2 {{lawSelected}}
+            h2 {{aboutLaw.name[0].name}}
+            p 日期:{{aboutLaw.name[0].start_date}}
+            p lyID:{{aboutLaw.lyID}}
+            p PCode:{{aboutLaw.PCode}}
