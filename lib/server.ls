@@ -6,9 +6,8 @@ const API_URI = \/api
 exports.start = (config, callback) ->
     if callback == void => callback = ->
 
-    winston
-        .remove winston.transports.Console
-        .add winston.transports.File, { filename: "#__dirname/../log" }
+    winston.clear!
+    winston.add winston.transports.File, { filename: "#__dirname/../log" }
 
     # Default values if not set.
     config.views_dir = config.views_dir or "#__dirname/../views"
