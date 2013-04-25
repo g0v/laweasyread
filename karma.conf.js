@@ -5,6 +5,10 @@
 // base path, that will be used to resolve files and exclude
 basePath = './';
 
+preprocessors = {
+  // app
+  'public/js/*.js': 'coverage'
+};
 
 // list of files / patterns to load in the browser
 files = [
@@ -22,7 +26,6 @@ files = [
   // app
   'public/js/*.js',
 
-
   // test
   'test/unit/*.js'
 ];
@@ -36,7 +39,12 @@ exclude = [
 
 // test results reporter to use
 // possible values: 'dots', 'progress', 'junit'
-reporters = ['progress'];
+reporters = ['coverage', 'progress'];
+
+coverageReporter = {
+    type: 'html',
+    dir: 'coverage/',
+}
 
 
 // web server port
