@@ -137,3 +137,31 @@ exports.getLaw = (req, rsp) ->
         PCode: law.PCode
 
     return callback null, ret
+
+exports.getLawNameList = (req, rsp) ->
+    callback = (err, lawNameList) ->
+        if err
+            rsp.jsonp do
+                isSuccess: false
+                reason: err.toString!
+        else
+            rsp.jsonp do
+                isSuccess: true
+                name: lawNameList
+
+    err, db <- mongodb.Db.connect mongoUri
+    if err => return callback err
+    callback := chainCloseDB db, callback
+
+    err, collection <- db.collection STATUTE
+    if err => return callback err
+
+    err, data <- collection.find {}, { name: true } .toArray!
+    if err => return callback err
+
+    lawNameList = []
+    for law in data
+        if law.name != void
+            for name in law.name
+                lawNameList.push name.name
+    callback null, lawNameList

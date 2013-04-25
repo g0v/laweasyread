@@ -40,6 +40,7 @@ exports.start = (config, callback) ->
     app.set 'json spaces', if config.dev => 4 else 0
 
     app.get "#API_URI/article/:query", route.getArticle
+    app.get "#API_URI/law", route.getLawNameList
     app.get "#API_URI/law/:query", route.getLaw
     app.get "#API_URI/suggestion/:query", route.getSuggestion
 

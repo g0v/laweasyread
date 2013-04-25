@@ -23,9 +23,9 @@ describe 'DataSet 1', (,) ->
               passed_date: \1946-12-25
             ...
     host = void
+    this.timeout 10000ms
 
     before (done) ->
-        this.timeout 10000
         err, str <- helper.startServer DATA
         expect err .to.not.exist
         host := str
@@ -97,6 +97,41 @@ describe 'DataSet 1', (,) ->
                 expect err .to.not.exist
                 expect body.indexOf \Sorry .not.be.below(0)
                 done!
+
+    after (done) ->
+        err <- helper.stopServer host
+        done!
+
+describe 'DataSet 2', (,) ->
+    const DATA =
+        statute:
+            * name:
+                * name: \中華民國憲法
+                ...
+            * name:
+                * name: \國民政府內政部組織法
+                * name: \內政部組織法
+            ...
+    host = void
+    this.timeout 10000ms
+
+    before (done) ->
+        err, str <- helper.startServer DATA
+        expect err .to.not.exist
+        host := str
+        done!
+
+    describe 'Test /api/law', (,) ->
+        it 'Query all law names', (done) ->
+            err, rsp, body <- request { uri: host + \api/law }
+            expect err .to.not.exist
+            expect JSON.parse body .to.eql do
+                isSuccess: true
+                name:
+                    * \中華民國憲法
+                    * \國民政府內政部組織法
+                    * \內政部組織法
+            done!
 
     after (done) ->
         err <- helper.stopServer host
