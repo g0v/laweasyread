@@ -9,3 +9,7 @@ angular.module \laweasyread.services <[ngResource]>
     ($resource) ->
         $resource '/api/law/:query'
 ]
+.factory \getLawNameList [
+    \$resource
+    ($resource) -> $resource \/api/law
+]

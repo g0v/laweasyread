@@ -1,13 +1,12 @@
 angular.module \laweasyread.controllers, []
 .controller \TypeaheadCtrl, [
-    \$scope, \Suggestions, \lawInfo
-    !($scope, Suggestions, lawInfo) ->
+    \$scope, \getLawNameList, \lawInfo
+    !($scope, getLawNameList, lawInfo) ->
         $scope.laws = []
-        do
-            res <- Suggestions.get {query: '法'}
+        getLawNameList.get {}, (res) ->
             if res.isSuccess
-                for item in res.suggestion
-                    $scope.laws.push item.law
+                for item in res.name
+                    $scope.laws.push item
 
         lawName <- $scope.$watch \lawSelected
         if lawName

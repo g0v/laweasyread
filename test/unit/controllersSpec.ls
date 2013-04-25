@@ -6,33 +6,34 @@ describe 'Test laweasyread.controllers', (...) ->
         var ctrl
         var scope
         var callback
-        Suggestions =
+        getLawNameList =
             get: ->
         lawInfo =
             get: ->
+
         beforeEach inject ($rootScope, $controller) ->
-            spyOn Suggestions, \get .andCallFake ->
+            spyOn getLawNameList, \get .andCallFake ->
                 callback := arguments.1
 
             scope := $rootScope.$new!
             ctrl := $controller \TypeaheadCtrl, do
                 $scope: scope
-                Suggestions: Suggestions
+                getLawNameList: getLawNameList
                 lawInfo: lawInfo
 
         it 'Get law list success', ->
             expect scope.laws .toEqual []
-            expect Suggestions.get .toHaveBeenCalledWith { query: \法 }, jasmine.any Function
+            expect getLawNameList.get .toHaveBeenCalledWith {}, jasmine.any Function
 
             callback do
                 isSuccess: true
-                suggestion: [ { law: "law_#num" } for num from 0 to 9 ]
+                name: [ "law_#num" for num from 1 to 20 ]
 
-            expect scope.laws .toEqual [ "law_#num" for num from 0 to 9 ]
+            expect scope.laws .toEqual [ "law_#num" for num from 1 to 20 ]
 
         it 'Get law list failed', ->
             expect scope.laws .toEqual []
-            expect Suggestions.get .toHaveBeenCalledWith { query: \法 }, jasmine.any Function
+            expect getLawNameList.get .toHaveBeenCalledWith {}, jasmine.any Function
 
             callback do
                 isSuccess: false
