@@ -8,7 +8,8 @@ describe 'Test laweasyread.controllers', (...) ->
         var callback
         Suggestions =
             get: ->
-
+        lawInfo =
+            get: ->
         beforeEach inject ($rootScope, $controller) ->
             spyOn Suggestions, \get .andCallFake ->
                 callback := arguments.1
@@ -17,6 +18,7 @@ describe 'Test laweasyread.controllers', (...) ->
             ctrl := $controller \TypeaheadCtrl, do
                 $scope: scope
                 Suggestions: Suggestions
+                lawInfo: lawInfo
 
         it 'Get law list success', ->
             expect scope.laws .toEqual []
