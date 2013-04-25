@@ -43,14 +43,11 @@ exports.start = (config, callback) ->
     app.get "#API_URI/law/:query", route.getLaw
     app.get "#API_URI/suggestion/:query", route.getSuggestion
 
-# error handling
-    do
-        (req, res) <- app.use!
+    app.use (req, res) ->
         res.render \404.jade
 
-    do
-        (err, req, res, next) <- app.use!
-        winston.error(err.stack);
+    app.use (err, req, res, next) ->
+        winston.err err.stack
         res.render \500.jade
 
     server = http.createServer app
