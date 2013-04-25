@@ -1,6 +1,6 @@
 'use strict';
 
-var optimist = require('optimist');
+var fs = require('fs');
 var path = require('path');
 var shell = require('shelljs');
 
@@ -13,7 +13,7 @@ var jscoverage = path.join(bin, 'jscoverage');
 
 var compile = function (src) {
     for (var i = 0; i < src.length; ++i) {
-        shell.exec(lsc + " -c " + src[i]);
+        shell.exec([lsc, '-c', src[i]].join(' '));
     }
 };
 
@@ -39,40 +39,36 @@ var find_all_test_scripts = function () {
 };
 
 (function () {
-    var argv, cmd, ret;
-
-    argv = optimist
-        .boolean(['coverage'])
-        .default({
-            'reporter': 'dot'
-        })
-        .argv;
+    var cmd;
+    var scripts;
+    var ret;
 
     compile(['lib', 'test']);
+    generate_coverage(['lib']);
 
-    if (argv.coverage) {
-        generate_coverage(['lib']);
+    scripts = find_all_test_scripts();
 
-        if (!/cov/.test(argv.reporter)) {
-            argv.reporter = 'html-cov';
-        }
-
-        process.env.LAWEASYREAD_COV = true;
-    }
-
+    // server side unit test
     cmd = [mocha,
         '--no-colors',
-        '--growl',
-        '--reporter', argv.reporter];
-    cmd = cmd.concat(find_all_test_scripts());
-
+        '--growl'];
+    cmd = cmd.concat(scripts);
     ret = shell.exec(cmd.join(' '));
     if (ret.code !== 0) shell.exit(ret.code);
 
+    // server side coverage
+    process.env.LAWEASYREAD_COV = true;
+    cmd = [mocha,
+        '--reporter', 'html-cov']
+    cmd = cmd.concat(scripts);
+    ret = shell.exec(cmd.join(' '), { silent: true });
+    if (ret.code !== 0) shell.exit(ret.code);
+    fs.writeFileSync(path.join('coverage', 'report.html'), ret.output);
+
+    // client side unit test & coverage
     cmd = [karma, 'start',
         '--single-run',
         '--browsers', 'PhantomJS'];
-
     ret = shell.exec(cmd.join(' '));
     if (ret.code !== 0) shell.exit(ret.code);
 })();

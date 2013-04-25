@@ -1,7 +1,7 @@
 *.js
 *.swp
-report.html
 
+/coverage
 /node_modules
 
 !/karma.conf.js
