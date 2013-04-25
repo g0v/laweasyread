@@ -156,7 +156,7 @@ exports.getLawNameList = (req, rsp) ->
     err, collection <- db.collection STATUTE
     if err => return callback err
 
-    err, data <- collection.find {}, { name: true } .toArray!
+    err, data <- collection.find {}, { name: true, _id:false } .toArray!
     if err => return callback err
 
     lawNameList = []
