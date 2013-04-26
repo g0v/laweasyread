@@ -15,13 +15,9 @@ exports.start = (config, callback) ->
 
     app = express!
 
-    app.use express.logger {
-        format: \dev
+    app.use express.logger do
         stream:
-            write: (msg) ->
-                # FIXME: winston does not work here
-                winston.info msg
-    }
+            write: (msg) -> winston.info msg
 
     app.use express.compress!
     app.use express.favicon!
