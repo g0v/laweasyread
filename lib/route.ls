@@ -123,7 +123,8 @@ exports.getLaw = (req, rsp) ->
     if err => return callback err
 
     err, law <- collection.find {
-        name: $elemMatch: { name: lawName } } .toArray!
+        name: $elemMatch: { name: lawName } }, {
+        name: true, lyID: true, PCode: true, history: true } .toArray!
     if err => return callback err
 
     if law.length != 1
@@ -135,6 +136,7 @@ exports.getLaw = (req, rsp) ->
         name: law.name
         lyID: law.lyID
         PCode: law.PCode
+        history: law.history
 
     return callback null, ret
 
