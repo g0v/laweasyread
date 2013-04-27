@@ -17,7 +17,12 @@ block querybox
 block content
     #lawcontent.ng-cloak
         .well
-            h2 {{aboutLaw.name[0].name}}
-            p 日期:{{aboutLaw.name[0].start_date}}
-            p lyID:{{aboutLaw.lyID}}
-            p PCode:{{aboutLaw.PCode}}
+            div(ng-repeat = "law in aboutLaw.name")
+                h2 {{law.name}}
+                p 起始日期：{{law.start_date}}
+            p lyID：{{aboutLaw.lyID}}
+            p PCode：{{aboutLaw.PCode}}
+            h5 歷史沿革：
+            //- FIXME  workaround : added "track by $index" due to unknown error
+            div(ng-repeat = "(date,reason) in aboutLaw.history track by $index")
+                p {{date}}：{{reason}}
