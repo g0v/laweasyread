@@ -25,12 +25,12 @@ devDependencies:
     growl: \~1.7.0
     grunt: \~0.4.1
     \grunt-contrib-watch : \~0.3.1
+    \grunt-nodemon : \0.0.0
     jscoverage: \~0.3.6
     karma: \0.8.4
     LiveScript: \1.1.x
     mocha: \~1.8.2
     request: \~2.16.6
-    \grunt-nodemon : \0.0.0
 licenses:
     * type: \MIT
       url: \https://github.com/g0v/laweasyread/blob/master/LICENSE
