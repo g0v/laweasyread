@@ -42,10 +42,21 @@ module.exports = function(grunt) {
                 files: ['package.ls'],
                 tasks: ['package_ls']
             }
+        },
+        nodemon: {
+            dev: {
+                options: {
+                    file: 'start.js',
+                    ignoredFiles: ['README.md', 'node_modules/**'],
+                    watchedExtensions: ['js', 'jade'],
+                    delayTime: 1
+                }
+            }
         }
+
     });
 
+	grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
     grunt.registerTask('default', ['watch']);
 };
