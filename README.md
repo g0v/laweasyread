@@ -55,7 +55,7 @@ The following is return JSON:
             }
             ...
         ]
-
+    }
 # Development
 
 ## Unit Test
