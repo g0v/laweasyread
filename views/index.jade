@@ -1,9 +1,15 @@
 extends layout
 
 block navbar
-    .navbar-inner
-        .container
-            .brand laweasyread
+    .navbar.navbar-fixed-top
+        .navbar-inner
+            .container-fluid
+                .brand laweasyread
+                ul.nav
+                    li
+                        a(href='/') Search
+                    li
+                        a(href='/apis') APIs
 block querybox
     .search-query
         input(id='query'
