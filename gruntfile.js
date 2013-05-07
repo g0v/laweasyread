@@ -52,11 +52,22 @@ module.exports = function(grunt) {
                     delayTime: 1
                 }
             }
+        },
+        stylus: {
+            compile: {
+                options: {
+                    compress: true
+                },
+                files: {
+                    'public/stylesheets/main.css': ['public/stylesheets/src/*.styl']
+                }
+            }
         }
 
     });
 
 	grunt.loadNpmTasks('grunt-nodemon');
+    grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.registerTask('default', ['watch']);
 };
