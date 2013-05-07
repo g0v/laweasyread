@@ -19,10 +19,19 @@ block content
         .well
             div(ng-repeat = "law in aboutLaw.name")
                 h2 {{law.name}}
-                p 起始日期：{{law.start_date}}
-            p lyID：{{aboutLaw.lyID}}
-            p PCode：{{aboutLaw.PCode}}
-            h5 歷史沿革：
-            //- FIXME  workaround : added "track by $index" due to unknown error
-            div(ng-repeat = "(date,reason) in aboutLaw.history track by $index")
-                p {{date}}：{{reason}}
+                p
+                    span.label.label-default 起始日期
+                    span ：{{law.start_date}}
+                p
+                    span.label.label-default lyID
+                    span ：{{aboutLaw.lyID}}
+                p
+                    span.label.label-default PCode
+                    span ：{{aboutLaw.PCode}}
+                hr
+                h2.label.label-inverse 歷史沿革
+                //- FIXME  workaround : added "track by $index" due to unknown error
+                div(ng-repeat = "(date,reason) in aboutLaw.history track by $index")
+                    span.label.label-default {{date}}
+                    span ：{{reason}}
+                hr
