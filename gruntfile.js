@@ -41,6 +41,13 @@ module.exports = function(grunt) {
             package_ls: {
                 files: ['package.ls'],
                 tasks: ['package_ls']
+            },
+            css: {
+                files: 'public/stylesheets/src/*.styl',
+                tasks: ['stylus'],
+                options: {
+                    livereload: true
+                }
             }
         },
         nodemon: {

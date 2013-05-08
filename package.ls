@@ -25,7 +25,7 @@ devDependencies:
     growl: \~1.7.0
     grunt: \~0.4.1
     \grunt-contrib-stylus : \~0.5.0
-    \grunt-contrib-watch : \~0.3.1
+    \grunt-contrib-watch : \~0.4.0
     \grunt-nodemon : \0.0.0
     jscoverage: \~0.3.6
     karma: \0.8.4
