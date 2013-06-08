@@ -36,7 +36,7 @@ This API returns article in law.
 *   __article__: Article of law in `/^\d+(-\d+)?$/` format
 
 ### Optional parameters:
-*   __date__: Date of article is [ISO8601](http://en.wikipedia.org/wiki/ISO_8601) (YYYY-MM-DD) format. Default is today.
+*   __date__: Date of article is [ISO-8601](http://en.wikipedia.org/wiki/ISO_8601) (YYYY-MM-DD) format. Default is today.
 
 ### Return JSON
     {
@@ -44,7 +44,7 @@ This API returns article in law.
         'ver': 1 // API version
         'reason': string // API fail reason. Not exist if isSuccess is true
         'article': { // Will not exist if isSuccess is false
-            'passed_date': string // Pass date in ISO8601 format.
+            'passed_date': string // Pass date in ISO-8601 format.
             'content': string // Article content. The leading two whitespaces are removed.
         }
     }
