@@ -39,6 +39,8 @@ exports.getArticle = (req, rsp) ->
         date = (new Date() .toISOString! .split \T)[0]
     if not /^\d{4}-\d{2}-\d{2}$/.test date => return callback new Error "date format error"
 
+    winston.info "getArticle name: #name, article: #article, date: #date"
+
     err, db <- mongodb.Db.connect mongoUri
     if err => return callback err
     callback := chainCloseDB db, callback
