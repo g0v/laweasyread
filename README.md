@@ -28,15 +28,22 @@ This API returns law information. Thq query shall be a full law name like
         }
     }
 
-## /api/article/:query
+## /api/article
 This API returns article in law.
 
-The following is return JSON:
+### Require parameter:
+*   __name__: Name of law
+*   __article__: Article of law in `/^\d+(-\d+)?$/` format
 
+### Optional parameters:
+*   __date__: Date of article is [ISO8601](http://en.wikipedia.org/wiki/ISO_8601) (YYYY-MM-DD) format. Default is today.
+
+### Return JSON
     {
         'isSuccess': boolean // This API call is success or not
         'reason': string // API fail reason. Not exist if isSuccess is true
         'article': { // Will not exist if isSuccess is false
+            'passed_date': string // Pass date in ISO8601 format.
             'content': string // Article content. The leading two whitespaces are removed.
         }
     }
