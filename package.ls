@@ -13,6 +13,7 @@ dependencies:
     \deromanize-component : \0.1.x
     express: \3.x
     jade: \~0.28.2
+    moment: \~2.0.0
     mongodb: \~1.2.14
     optimist: \~0.3.5
     \romanize-component : \0.1.x
