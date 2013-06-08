@@ -32,7 +32,7 @@ exports.getArticle = (req, rsp) ->
 
     article = req.param \article
     if article == void => return callback new Error "No article param"
-    if not /^\d+(?:\-\d+)?$/.test article => return callback new Error "article format error"
+    if not /^\d+(?:-\d+)?$/.test article => return callback new Error "article format error"
 
     date = req.param \date
     if date == void
