@@ -31,7 +31,7 @@ This API returns law information. Thq query shall be a full law name like
 ## /api/article
 This API returns article in law.
 
-### Require parameter:
+### Require parameters:
 *   __name__: Name of law
 *   __article__: Article of law in `/^\d+(-\d+)?$/` format
 
