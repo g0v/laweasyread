@@ -44,7 +44,7 @@ exports.start = (config, callback) ->
         res.render \404.jade
 
     app.use (err, req, res, next) ->
-        winston.err err.stack
+        winston.error err.stack
         res.render \500.jade
 
     server = http.createServer app
