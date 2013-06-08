@@ -57,28 +57,45 @@ describe 'DataSet 1', (,) ->
                 expect (JSON.parse body .isSuccess) .to.eql false
                 done!
 
-    describe 'Test /api/article/:query', (,) ->
+    describe 'Test /api/article', (,) ->
         describe 'Good input', (,) ->
-            it '中華民國憲法_1', (done) ->
-                err, rsp, body <- request { uri: host + \api/article/中華民國憲法_1 }
+            it 'name + article', (done) ->
+                err, rsp, body <- request { uri: host + \api/article?name=中華民國憲法&article=1 }
                 expect err .to.not.exist
                 expect JSON.parse body .to.eql do
                     isSuccess: true
                     article:
-                        content: DATA.article[0].content
+                        passed_date: \1946-12-25
+                        content: \中華民國基於三民主義，為民有、民治、民享之民主共和國。\n
+                done!
+
+            it 'name + article + date', (done) ->
+                err, rsp, body <- request { uri: host + \api/article?name=中華民國憲法&article=1&date=1946-12-25 }
+                expect err .to.not.exist
+                expect JSON.parse body .to.eql do
+                    isSuccess: true
+                    article:
+                        passed_date: \1946-12-25
+                        content: \中華民國基於三民主義，為民有、民治、民享之民主共和國。\n
                 done!
 
         describe 'Bad input', (,) ->
-            it '中華民國憲法_', (done) ->
-                err, rsp, body <- request { uri: host + \api/article/中華民國憲法_ }
+            it 'bad name', (done) ->
+                err, rsp, body <- request { uri: host + \api/article?name=憲法&article=1 }
                 expect err .to.not.exist
-                expect (JSON.parse body .isSuccess) .to.eql false
+                expect (JSON.parse body .isSuccess) .to.be.false
                 done!
 
-            it '憲法_1', (done) ->
-                err, rsp, body <- request { uri: host + \api/article/憲法_1 }
+            it 'bad article', (done) ->
+                err, rsp, body <- request { uri: host + \api/article?name=憲法&article=1- }
                 expect err .to.not.exist
-                expect (JSON.parse body .isSuccess) .to.eql false
+                expect (JSON.parse body .isSuccess) .to.be.false
+                done!
+
+            it 'bad date', (done) ->
+                err, rsp, body <- request { uri: host + \api/article?name=憲法&article=1&date=1946-12-24 }
+                expect err .to.not.exist
+                expect (JSON.parse body .isSuccess) .to.be.false
                 done!
 
     describe 'Test /api/suggestion/', (,) ->

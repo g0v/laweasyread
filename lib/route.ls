@@ -1,4 +1,4 @@
-require!<[mongodb winston]>
+require!<[moment mongodb winston]>
 
 # mongodb collection name
 const ARTICLE = \article
@@ -18,21 +18,26 @@ chainCloseDB = (db, cb) ->
 exports.getArticle = (req, rsp) ->
     callback = (err, article) ->
         if err
-            rsp.jsonp {
+            winston.warn err.toString!
+            rsp.jsonp do
                 isSuccess: false
                 reason: err.toString!
-            }
         else
-            rsp.jsonp {
+            rsp.jsonp do
                 isSuccess: true
                 article: article
-            }
 
-    m = /^([^_]+)_([\d-]+)$/.exec req.params.query
-    if not m => return callback new Error "query string #{req.params.query} format error"
+    name = req.param \name
+    if name == void => return callback new Error "No name param"
 
-    name = m.1
-    article = m.2
+    article = req.param \article
+    if article == void => return callback new Error "No article param"
+    if not /^\d+(?:\-\d+)?$/.test article => return callback new Error "article format error"
+
+    date = req.param \date
+    if date == void
+        date = (new Date() .toISOString! .split \T)[0]
+    if not /^\d{4}-\d{2}-\d{2}$/.test date => return callback new Error "date format error"
 
     err, db <- mongodb.Db.connect mongoUri
     if err => return callback err
@@ -41,23 +46,28 @@ exports.getArticle = (req, rsp) ->
     err, collection <- db.collection STATUTE
     if err => return callback err
 
-    err, data <- collection.find { name: $elemMatch: { name: name } } .toArray
+    err, law <- collection.find { name: $elemMatch: { name: name } }, { lyID: true } .toArray!
     if err => return callback err
 
-    if data.length != 1 => return callback new Error "Cannot find law #name"
+    if law.length != 1
+        return callback new Error "Found #{law.length} when query law name #name"
 
-    lyID = data[0].lyID
+    lyID = law[0].lyID
 
     err, collection <- db.collection ARTICLE
     if err => return callback err
 
-    err, data <- collection.find { lyID: lyID, article: article } .toArray
+    err, data <- collection.find { article: article, lyID: lyID } .toArray!
     if err => return callback err
 
-    if data.length != 1 => return callback new Error "Cannot find law #name artcile #article"
-
-    ret =
-        content: data[0].content
+    var ret
+    for item in data
+        if not moment date .isBefore item.passed_date
+            if ret == void or moment item.passed_date .isAfter ret.passed_date
+                ret = do
+                    passed_date: item.passed_date
+                    content: item.content
+    if ret == void => return callback new Error "Cannot find article"
 
     return callback null, ret
 
