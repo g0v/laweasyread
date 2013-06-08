@@ -64,6 +64,7 @@ describe 'DataSet 1', (,) ->
                 expect err .to.not.exist
                 expect JSON.parse body .to.eql do
                     isSuccess: true
+                    ver: 1
                     article:
                         passed_date: \1946-12-25
                         content: \中華民國基於三民主義，為民有、民治、民享之民主共和國。\n
@@ -74,6 +75,7 @@ describe 'DataSet 1', (,) ->
                 expect err .to.not.exist
                 expect JSON.parse body .to.eql do
                     isSuccess: true
+                    ver: 1
                     article:
                         passed_date: \1946-12-25
                         content: \中華民國基於三民主義，為民有、民治、民享之民主共和國。\n
@@ -83,19 +85,25 @@ describe 'DataSet 1', (,) ->
             it 'bad name', (done) ->
                 err, rsp, body <- request { uri: host + \api/article?name=憲法&article=1 }
                 expect err .to.not.exist
-                expect (JSON.parse body .isSuccess) .to.be.false
+                json = JSON.parse body
+                expect json.isSuccess .to.be.false
+                expect json.ver .to.eql 1
                 done!
 
             it 'bad article', (done) ->
                 err, rsp, body <- request { uri: host + \api/article?name=憲法&article=1- }
                 expect err .to.not.exist
-                expect (JSON.parse body .isSuccess) .to.be.false
+                json = JSON.parse body
+                expect json.isSuccess .to.be.false
+                expect json.ver .to.eql 1
                 done!
 
             it 'bad date', (done) ->
                 err, rsp, body <- request { uri: host + \api/article?name=憲法&article=1&date=1946-12-24 }
                 expect err .to.not.exist
-                expect (JSON.parse body .isSuccess) .to.be.false
+                json = JSON.parse body
+                expect json.isSuccess .to.be.false
+                expect json.ver .to.eql 1
                 done!
 
     describe 'Test /api/suggestion/', (,) ->

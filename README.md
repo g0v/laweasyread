@@ -28,7 +28,7 @@ This API returns law information. Thq query shall be a full law name like
         }
     }
 
-## /api/article
+## /api/article (Ver 1)
 This API returns article in law.
 
 ### Require parameters:
@@ -41,6 +41,7 @@ This API returns article in law.
 ### Return JSON
     {
         'isSuccess': boolean // This API call is success or not
+        'ver': 1 // API version
         'reason': string // API fail reason. Not exist if isSuccess is true
         'article': { // Will not exist if isSuccess is false
             'passed_date': string // Pass date in ISO8601 format.

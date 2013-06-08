@@ -15,16 +15,19 @@ chainCloseDB = (db, cb) ->
         db.close!
         cb err, res
 
+const GET_ARTICLE_VER = 1
 exports.getArticle = (req, rsp) ->
     callback = (err, article) ->
         if err
             winston.warn err.toString!
             rsp.jsonp do
                 isSuccess: false
+                ver: GET_ARTICLE_VER
                 reason: err.toString!
         else
             rsp.jsonp do
                 isSuccess: true
+                ver: GET_ARTICLE_VER
                 article: article
 
     name = req.param \name
