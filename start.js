@@ -1,6 +1,7 @@
 'use strict';
 var optimist = require('optimist');
 var server = require('./').server;
+var winston = require('winston');
 
 var config = optimist
     .boolean(['dev'])
@@ -9,5 +10,7 @@ var config = optimist
         'port': process.env.PORT || 3000
     })
     .argv;
+
+config.logger = [ winston.transports.Console ];
 
 server.start(config);

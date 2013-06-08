@@ -7,7 +7,9 @@ exports.start = (config, callback) ->
     if callback == void => callback = ->
 
     winston.clear!
-    winston.add winston.transports.Console
+    if config.logger != void
+        for logger in config.logger
+            winston.add logger
 
     # Default values if not set.
     config.views_dir = config.views_dir or "#__dirname/../views"
