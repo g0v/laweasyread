@@ -18,7 +18,7 @@ files = [
   // lib
   'public/js/lib/angular.js',
   'public/js/lib/angular-resource.js',
-  'public/js/lib/ui-bootstrap-tpls-0.2.0.js',
+  'public/js/lib/ui-bootstrap-tpls-0.3.0.js',
 
   // test lib
   'test/lib/angular/angular-mocks.js',
