@@ -66,6 +66,8 @@ describe 'DataSet 1', (,) ->
                     isSuccess: true
                     ver: 1
                     article:
+                        name: \中華民國憲法
+                        article: \1
                         passed_date: \1946-12-25
                         content: \中華民國基於三民主義，為民有、民治、民享之民主共和國。\n
                 done!
@@ -77,6 +79,8 @@ describe 'DataSet 1', (,) ->
                     isSuccess: true
                     ver: 1
                     article:
+                        name: \中華民國憲法
+                        article: \1
                         passed_date: \1946-12-25
                         content: \中華民國基於三民主義，為民有、民治、民享之民主共和國。\n
                 done!

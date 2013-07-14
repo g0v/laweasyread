@@ -70,6 +70,8 @@ exports.getArticle = (req, rsp) ->
         if not moment date .isBefore item.passed_date
             if ret == void or moment item.passed_date .isAfter ret.passed_date
                 ret = do
+                    name: name
+                    article: article
                     passed_date: item.passed_date
                     content: item.content
     if ret == void => return callback new Error "Cannot find article"

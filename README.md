@@ -22,7 +22,7 @@ This API returns law information. Thq query shall be a full law name like
                     'date': string // Start date of name
                 }
             ]
-            'history': // TBD
+            'history': // Object within which keys are dates and values are what's done on that day
             'lyID': string // lyID is used in http://lis.ly.gov.tw/lgcgi/lglaw
             'PCode': string // PCode is used in http://law.moj.gov.tw/
         }
@@ -44,6 +44,8 @@ This API returns article in law.
         'ver': 1 // API version
         'reason': string // API fail reason. Not exist if isSuccess is true
         'article': { // Will not exist if isSuccess is false
+            'name': string // Name of law requested
+            'article': // Article of law requested
             'passed_date': string // Pass date in ISO-8601 format.
             'content': string // Article content. The leading two whitespaces are removed.
         }
