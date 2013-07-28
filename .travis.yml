@@ -7,5 +7,7 @@ services:
 notifications:
   hipchat:
     format: html
+    template:
+    - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
     rooms:
     - secure: "gen89t1y0b6r1/O85M36+2b5t+UnrNLFIuGnW9DuFLaRPWOEAXX9/1IRgixi\nN1FgF5L5RydBs9IZDPjojmKvZIIw1vlwU5f70UKwOKxwz6mKghWXK65Xet0e\n1VQwjEey6/tQsJyrsYfV91r/xWDXNIIlXyeCnXQbTronYGfTzr0="
