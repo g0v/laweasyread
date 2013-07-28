@@ -6,7 +6,6 @@ services:
 - mongodb
 notifications:
   hipchat:
-    - secure: "gen89t1y0b6r1/O85M36+2b5t+UnrNLFIuGnW9DuFLaRPWOEAXX9/1IRgixi\nN1FgF5L5RydBs9IZDPjojmKvZIIw1vlwU5f70UKwOKxwz6mKghWXK65Xet0e\n1VQwjEey6/tQsJyrsYfV91r/xWDXNIIlXyeCnXQbTronYGfTzr0="
-notifications:
-  hipchat:
     format: html
+    rooms:
+    - secure: "gen89t1y0b6r1/O85M36+2b5t+UnrNLFIuGnW9DuFLaRPWOEAXX9/1IRgixi\nN1FgF5L5RydBs9IZDPjojmKvZIIw1vlwU5f70UKwOKxwz6mKghWXK65Xet0e\n1VQwjEey6/tQsJyrsYfV91r/xWDXNIIlXyeCnXQbTronYGfTzr0="
