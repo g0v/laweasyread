@@ -1,0 +1,42 @@
+{
+  "author": "czchen",
+  "status": "alpha",
+  "thumbnail": "https://raw.github.com/g0v/laweasyread-front/master/icon.png",
+  "name": "lawEasyRead",
+  "description": "API for Taiwan Law",
+  "description_zh": "台灣法規的API",
+  "homepage": "http://laweasyread.herokuapp.com/",
+  "document": "http://hack.g0v.tw/laweasyread",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/laweasyread"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "keywords": [
+    "law",
+    "LiveScript"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "api", "website"
+  ],
+  "projects": [
+    "laweasyread"
+  ],
+  "contributors": [
+    "czchen",
+    "kcliu",
+    "kong0107"
+  ],
+  "needs": [
+    "designer",
+    "programmer",
+    "writer"
+  ]
+}
