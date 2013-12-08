@@ -34,6 +34,7 @@ This API returns article in law.
 ### Require parameters:
 *   __name__: Name of law
 *   __article__: Article of law in `/^\d+(-\d+)?$/` format
+e.g. http://laweasyread.herokuapp.com/api/article?name=中華民國憲法&article=1
 
 ### Optional parameters:
 *   __date__: Date of article is [ISO-8601](http://en.wikipedia.org/wiki/ISO_8601) (YYYY-MM-DD) format. Default is today.
